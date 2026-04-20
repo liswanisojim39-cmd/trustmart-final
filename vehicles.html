@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustMart - Vehicles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #27ae60;
+            --dark: #2c3e50;
+            --light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 20px;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            background: #eee url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600') center/cover;
+        }
+
+        .listing-details {
+            padding: 20px;
+        }
+
+        .listing-price {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .listing-title {
+            font-size: 18px;
+            color: var(--dark);
+            margin: 8px 0;
+            font-weight: 600;
+        }
+
+        .listing-loc {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .wa-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <h2 style="margin:0; color: var(--dark);">Vehicles</h2>
+    </div>
+
+    <div class="listing-card">
+        <div class="listing-image"></div>
+        <div class="listing-details">
+            <p class="listing-price">K 145,000</p>
+            <p class="listing-title">Toyota Corolla - Pristine Condition</p>
+            <p class="listing-loc"><i class="fas fa-map-marker-alt"></i> Kitwe, Copperbelt</p>
+            <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20Toyota%20Corolla" class="wa-button">
+                <i class="fab fa-whatsapp"></i> Chat with Seller
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
