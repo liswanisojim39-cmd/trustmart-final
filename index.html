@@ -10,7 +10,7 @@
             --primary: #27ae60;
             --dark: #2c3e50;
             --light: #f4f7f6;
-            --accent: #e67e22;
+            --white: #ffffff;
         }
 
         body {
@@ -20,172 +20,186 @@
             padding-bottom: 100px;
         }
 
-        .hero {
+        /* Hero & Search */
+        .header {
             background: linear-gradient(135deg, var(--primary), #2ecc71);
             color: white;
-            padding: 40px 20px 60px 20px;
+            padding: 30px 20px 50px 20px;
             text-align: center;
-            border-radius: 0 0 30px 30px;
+            border-radius: 0 0 25px 25px;
         }
 
-        .hero h1 { margin: 0; font-size: 32px; letter-spacing: -1px; }
-        .hero p { opacity: 0.9; font-size: 14px; margin-top: 5px; }
+        .header h1 { margin: 0; font-size: 28px; }
+        
+        .search-container {
+            margin: -25px 20px 20px 20px;
+        }
 
-        .user-status-card {
-            margin: -30px 20px 20px 20px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .search-bar {
+            background: var(--white);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            padding: 12px 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        /* Categories */
         .section-title {
             padding: 0 20px;
             font-size: 18px;
+            font-weight: bold;
             color: var(--dark);
-            margin: 20px 0 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin: 10px 0;
         }
 
         .cat-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             padding: 0 20px;
         }
 
-        .cat-card {
-            background: white;
-            padding: 15px 10px;
-            border-radius: 12px;
+        .cat-item {
             text-align: center;
             text-decoration: none;
             color: var(--dark);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        .cat-card i { font-size: 24px; color: var(--primary); margin-bottom: 8px; display: block; }
-        .cat-card span { font-size: 11px; font-weight: 600; }
-
-        /* Listing Cards */
-        .listing-container {
-            padding: 0 20px;
-        }
-
-        .listing-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .listing-img {
-            width: 100%;
-            height: 180px;
-            background-color: #ddd;
-            background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=500');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .listing-info {
-            padding: 15px;
-        }
-
-        .price {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 18px;
-            margin: 0;
-        }
-
-        .title {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 5px 0;
-            color: var(--dark);
-        }
-
-        .location {
-            font-size: 12px;
-            color: #777;
-        }
-
-        .btn-post {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--primary);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
+        .cat-icon {
+            background: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.5);
-            text-decoration: none;
+            margin: 0 auto 5px auto;
+            color: var(--primary);
+            font-size: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+
+        .cat-item span { font-size: 10px; font-weight: 600; }
+
+        /* Listing Card */
+        .feed { padding: 20px; }
+        
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card-img {
+            height: 200px;
+            background: #eee url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500') center/cover;
+        }
+
+        .card-body { padding: 15px; position: relative; }
+        .card-price { color: var(--primary); font-weight: bold; font-size: 18px; }
+        .card-title { font-size: 15px; margin: 5px 0; color: var(--dark); }
+        .card-loc { font-size: 12px; color: #888; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
             z-index: 1000;
+        }
+
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #bdc3c7;
+            font-size: 12px;
+        }
+
+        .nav-item.active { color: var(--primary); }
+        .nav-item i { font-size: 20px; display: block; }
+
+        .add-btn {
+            background: var(--primary);
+            color: white !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-top: -25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
+    <div class="header">
         <h1>Trust<b>Mart</b></h1>
-        <p>Your Trusted Zambian Directory & Marketplace</p>
     </div>
 
-    <div class="user-status-card">
-        <span style="color:var(--primary); font-weight: bold;">Marketplace Active</span>
-        <span style="font-size: 12px; color: #777;">Lusaka, Zambia</span>
+    <div class="search-container">
+        <div class="search-bar">
+            <i class="fas fa-search" style="color: #ccc;"></i>
+            <input type="text" placeholder="Search for houses, cars, phones...">
+        </div>
     </div>
 
     <h2 class="section-title">Categories</h2>
     <div class="cat-grid">
-        <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20Property" class="cat-card">
-            <i class="fas fa-home"></i>
-            <span>Property</span>
+        <a href="https://wa.me/260979710270?text=Property" class="cat-item">
+            <div class="cat-icon"><i class="fas fa-home"></i></div>
+            <span>House</span>
         </a>
-        <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20a%20Vehicle" class="cat-card">
-            <i class="fas fa-car"></i>
-            <span>Vehicles</span>
+        <a href="https://wa.me/260979710270?text=Vehicles" class="cat-item">
+            <div class="cat-icon"><i class="fas fa-car"></i></div>
+            <span>Cars</span>
         </a>
-        <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20Electronics" class="cat-card">
-            <i class="fas fa-mobile-alt"></i>
-            <span>Electronics</span>
+        <a href="https://wa.me/260979710270?text=Jobs" class="cat-item">
+            <div class="cat-icon"><i class="fas fa-briefcase"></i></div>
+            <span>Jobs</span>
+        </a>
+        <a href="https://wa.me/260979710270?text=Services" class="cat-item">
+            <div class="cat-icon"><i class="fas fa-tools"></i></div>
+            <span>Services</span>
         </a>
     </div>
 
-    <div class="section-title">
-        <span>Featured Listings</span>
-        <a href="#" style="font-size: 12px; color: var(--primary); text-decoration: none;">View All</a>
-    </div>
-
-    <div class="listing-container">
-        <a href="https://wa.me/260979710270?text=Is%20the%203-Bedroom%20House%20in%20Lusaka%20still%20available?" class="listing-card">
-            <div class="listing-img"></div>
-            <div class="listing-info">
-                <p class="price">K 1,200,000</p>
-                <p class="title">Modern 3-Bedroom House</p>
-                <p class="location"><i class="fas fa-map-marker-alt"></i> Avondale, Lusaka</p>
+    <div class="feed">
+        <h2 class="section-title" style="padding:0; margin-bottom:15px;">Recent Ads</h2>
+        <div class="card">
+            <div class="card-img"></div>
+            <div class="card-body">
+                <p class="card-price">K 850,000</p>
+                <p class="card-title">Newly Built 2-Bedroom House</p>
+                <p class="card-loc"><i class="fas fa-map-marker-alt"></i> Meanwood, Lusaka</p>
             </div>
-        </a>
+        </div>
     </div>
 
-    <a href="https://wa.me/260979710270?text=Hello!%20I%20want%20to%20list%20an%20item%20on%20TrustMart" class="btn-post">
-        <i class="fas fa-plus"></i>
-    </a>
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fas fa-home"></i>Home</a>
+        <a href="#" class="nav-item"><i class="fas fa-heart"></i>Saved</a>
+        <a href="https://wa.me/260979710270?text=I%20want%20to%20sell" class="nav-item add-btn"><i class="fas fa-plus"></i></a>
+        <a href="#" class="nav-item"><i class="fas fa-bell"></i>Alerts</a>
+        <a href="#" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+    </div>
 
 </body>
 </html>
