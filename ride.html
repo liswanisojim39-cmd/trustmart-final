@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustRide - Get a Ride</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        #map { height: 350px; width: 100%; border-radius: 0 0 20px 20px; }
+        .ride-options { padding: 20px; }
+        .ride-card {
+            display: flex; align-items: center; background: white;
+            padding: 15px; margin-bottom: 10px; border-radius: 10px;
+            border: 2px solid #eee;
+        }
+        .price-box { margin-left: auto; text-align: right; }
+        .price { font-size: 20px; font-weight: bold; color: #27ae60; display: block; }
+        #distance-info { font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <header style="padding: 10px;">
+        <a href="index.html" style="color:white; float:left; text-decoration:none;">← Back</a>
+        <div class="logo">Trust<b>Ride</b></div>
+    </header>
+
+    <div id="map"></div>
+
+    <div class="ride-options">
+        <h3>Your Trip</h3>
+        
+        <div class="ride-card">
+            <i class="fa fa-car" style="font-size: 24px; margin-right: 15px;"></i>
+            <div>
+                <strong>Estimated Fare</strong><br>
+                <small id="distance-info">Calculating distance...</small>
+            </div>
+            <div class="price-box">
+                <span class="price" id="final-price">K0.00</span>
+            </div>
+        </div>
+
+        <button class="btn-primary" style="width:100%; padding:18px; font-size:18px;">
+            Confirm Request
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+        // Start map in Lusaka
+        var map = L.map('map').setView([-15.4167, 28.2833], 13); 
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // PRICING RULES
+        const BASE_FARE = 15.00; 
+        const PER_KM_RATE = 8.50;
+
+        // CALCULATE ROUTE
+        var control = L.Routing.control({
+            waypoints: [
+                L.latLng(-15.4167, 28.2833), // Start point
+                L.latLng(-15.4450, 28.3100)  // Destination point (example)
+            ],
+            lineOptions: { styles: [{color: '#27ae60', weight: 5}] },
+            createMarker: function() { return null; } // Hides default markers if you want
+        }).on('routesfound', function(e) {
+            var routes = e.routes;
+            var distInMeters = routes[0].summary.totalDistance;
+            var distInKm = distInMeters / 1000;
+            
+            // Formula: Base + (KM * Rate)
+            var total = BASE_FARE + (distInKm * PER_KM_RATE);
+
+            // Update UI
+            document.getElementById('final-price').innerText = "K" + total.toFixed(2);
+            document.getElementById('distance-info').innerText = distInKm.toFixed(2) + " km total distance";
+            
+        }).addTo(map);
+    </script>
+</body>
+</html>

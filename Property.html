@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustTrade - Real Estate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .filter-bar {
+            background: white;
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .filter-btn {
+            white-space: nowrap;
+            background: #eee;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .property-list { padding: 15px; }
+        .prop-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .prop-img {
+            width: 100%;
+            height: 200px;
+            background: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+        .badge-verified {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #27ae60;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .prop-info { padding: 15px; }
+        .price { font-size: 20px; font-weight: bold; color: #27ae60; }
+        .details { display: flex; gap: 15px; color: #666; margin-top: 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header style="padding: 10px;">
+        <a href="index.html" style="color:white; float:left; text-decoration:none;">← Back</a>
+        <div class="logo">Trust<b>Home</b></div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="filter-btn" style="background: #27ae60; color: white;">All</div>
+        <div class="filter-btn">For Rent</div>
+        <div class="filter-btn">For Sale</div>
+        <div class="filter-btn">Apartments</div>
+        <div class="filter-btn">Land</div>
+    </div>
+
+    <div class="property-list">
+        <div class="prop-card">
+            <div class="prop-img">
+                <i class="fa fa-image fa-3x"></i>
+                <div class="badge-verified"><i class="fa fa-check-circle"></i> VERIFIED AGENT</div>
+            </div>
+            <div class="prop-info">
+                <div class="price">K8,500 / month</div>
+                <h3>Modern 3-Bedroom Apartment</h3>
+                <p style="color: #777;"><i class="fa fa-location-dot"></i> Avondale, Lusaka</p>
+                <div class="details">
+                    <span><i class="fa fa-bed"></i> 3 Beds</span>
+                    <span><i class="fa fa-bath"></i> 2 Baths</span>
+                    <span><i class="fa fa-expand"></i> 150 sqm</span>
+                </div>
+                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Contact Owner</button>
+            </div>
+        </div>
+
+        <div class="prop-card">
+            <div class="prop-img" style="background: #bbb;">
+                <i class="fa fa-image fa-3x"></i>
+                <div class="badge-verified"><i class="fa fa-check-circle"></i> VERIFIED OWNER</div>
+            </div>
+            <div class="prop-info">
+                <div class="price">K1,200,000</div>
+                <h3>Executive 4-Bedroom House</h3>
+                <p style="color: #777;"><i class="fa fa-location-dot"></i> Riverside, Kitwe</p>
+                <div class="details">
+                    <span><i class="fa fa-bed"></i> 4 Beds</span>
+                    <span><i class="fa fa-bath"></i> 3 Baths</span>
+                </div>
+                <button class="btn-primary" style="width: 100%; margin-top: 15px;">View Details</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

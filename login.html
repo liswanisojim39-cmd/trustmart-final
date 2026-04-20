@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TrustMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div style="padding:20px; max-width:400px; margin:50px auto; background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+        <h2 style="text-align:center;">Join TrustMart</h2>
+        <input type="email" id="email" placeholder="Email Address" style="width:100%; margin:10px 0; padding:12px; border:1px solid #ddd; border-radius:8px;">
+        <input type="password" id="pass" placeholder="Password" style="width:100%; margin:10px 0; padding:12px; border:1px solid #ddd; border-radius:8px;">
+        <button id="regBtn" class="btn-primary" style="width:100%; padding:15px;">Create Account</button>
+        <p id="msg" style="text-align:center; color:red;"></p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="config.js"></script>
+    <script>
+        document.getElementById('regBtn').onclick = () => {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+            auth.createUserWithEmailAndPassword(email, pass).then(user => {
+                db.collection("users").doc(user.user.uid).set({ email, verified: false });
+                window.location.href = "index.html";
+            }).catch(err => document.getElementById('msg').innerText = err.message);
+        };
+    </script>
+</body>
+</html>

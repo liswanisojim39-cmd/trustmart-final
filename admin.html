@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - TrustMart</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-card { background: white; margin: 15px; padding: 15px; border-radius: 12px; border-left: 5px solid orange; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .controls { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-v { background: #27ae60; color: white; border: none; flex: 1; padding: 12px; border-radius: 8px; }
+        .btn-d { background: #e74c3c; color: white; border: none; flex: 1; padding: 12px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header><div class="logo">Admin<b>Panel</b></div></header>
+
+    <div id="admin-feed"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="config.js"></script>
+
+    <script>
+        db.collection("listings").where("verified", "==", false).onSnapshot((snapshot) => {
+            const container = document.getElementById('admin-feed');
+            container.innerHTML = "";
+            snapshot.forEach((doc) => {
+                const item = doc.data();
+                const card = `
+                    <div class="admin-card">
+                        <h3>${item.title} (K${item.price})</h3>
+                        <p><strong>Phone:</strong> ${item.phone}</p>
+                        <p>${item.description}</p>
+                        <div class="controls">
+                            <button class="btn-v" onclick="verify('${doc.id}')">Verify Post</button>
+                            <button class="btn-d" onclick="remove('${doc.id}')">Delete</button>
+                        </div>
+                    </div>`;
+                container.innerHTML += card;
+            });
+        });
+
+        async function verify(id) { if(confirm("Make live?")) await db.collection("listings").doc(id).update({verified:true}); }
+        async function remove(id) { if(confirm("Delete permanently?")) await db.collection("listings").doc(id).delete(); }
+    </script>
+</body>
+</html>

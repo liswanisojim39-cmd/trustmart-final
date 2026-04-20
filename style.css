@@ -1,0 +1,8 @@
+body { font-family: sans-serif; background: #f4f7f6; margin: 0; }
+header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+.logo { font-size: 24px; }
+.btn-primary { background: #27ae60; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.btn-secondary { background: #34495e; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+.category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+.card { background: white; padding: 20px; text-align: center; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; }
+.card i { font-size: 30px; color: #27ae60; margin-bottom: 10px; }
