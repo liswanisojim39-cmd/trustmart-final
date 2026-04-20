@@ -3,109 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustTrade - Real Estate</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TrustMart - Property</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .filter-bar {
-            background: white;
-            padding: 15px;
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            border-bottom: 1px solid #ddd;
-        }
-        .filter-btn {
-            white-space: nowrap;
-            background: #eee;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        .property-list { padding: 15px; }
-        .prop-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .prop-img {
-            width: 100%;
-            height: 200px;
-            background: #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-        }
-        .badge-verified {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #27ae60;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .prop-info { padding: 15px; }
-        .price { font-size: 20px; font-weight: bold; color: #27ae60; }
-        .details { display: flex; gap: 15px; color: #666; margin-top: 10px; font-size: 14px; }
+        body { font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        .back-btn { text-decoration: none; color: #27ae60; font-weight: bold; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .card-img { height: 150px; background: #ddd url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500') center/cover; }
+        .card-body { padding: 15px; }
+        .price { color: #27ae60; font-weight: bold; font-size: 20px; margin: 0; }
+        .wa-btn { display: block; background: #25d366; color: white; text-align: center; padding: 10px; border-radius: 10px; text-decoration: none; margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
-
-    <header style="padding: 10px;">
-        <a href="index.html" style="color:white; float:left; text-decoration:none;">← Back</a>
-        <div class="logo">Trust<b>Home</b></div>
-    </header>
-
-    <div class="filter-bar">
-        <div class="filter-btn" style="background: #27ae60; color: white;">All</div>
-        <div class="filter-btn">For Rent</div>
-        <div class="filter-btn">For Sale</div>
-        <div class="filter-btn">Apartments</div>
-        <div class="filter-btn">Land</div>
-    </div>
-
-    <div class="property-list">
-        <div class="prop-card">
-            <div class="prop-img">
-                <i class="fa fa-image fa-3x"></i>
-                <div class="badge-verified"><i class="fa fa-check-circle"></i> VERIFIED AGENT</div>
-            </div>
-            <div class="prop-info">
-                <div class="price">K8,500 / month</div>
-                <h3>Modern 3-Bedroom Apartment</h3>
-                <p style="color: #777;"><i class="fa fa-location-dot"></i> Avondale, Lusaka</p>
-                <div class="details">
-                    <span><i class="fa fa-bed"></i> 3 Beds</span>
-                    <span><i class="fa fa-bath"></i> 2 Baths</span>
-                    <span><i class="fa fa-expand"></i> 150 sqm</span>
-                </div>
-                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Contact Owner</button>
-            </div>
-        </div>
-
-        <div class="prop-card">
-            <div class="prop-img" style="background: #bbb;">
-                <i class="fa fa-image fa-3x"></i>
-                <div class="badge-verified"><i class="fa fa-check-circle"></i> VERIFIED OWNER</div>
-            </div>
-            <div class="prop-info">
-                <div class="price">K1,200,000</div>
-                <h3>Executive 4-Bedroom House</h3>
-                <p style="color: #777;"><i class="fa fa-location-dot"></i> Riverside, Kitwe</p>
-                <div class="details">
-                    <span><i class="fa fa-bed"></i> 4 Beds</span>
-                    <span><i class="fa fa-bath"></i> 3 Baths</span>
-                </div>
-                <button class="btn-primary" style="width: 100%; margin-top: 15px;">View Details</button>
-            </div>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <h2>Available Property</h2>
+    
+    <div class="card">
+        <div class="card-img"></div>
+        <div class="card-body">
+            <p class="price">K 1,200,000</p>
+            <p>3 Bedroom House in Avondale</p>
+            <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20Avondale%20House" class="wa-btn">Enquire on WhatsApp</a>
         </div>
     </div>
-
 </body>
 </html>
