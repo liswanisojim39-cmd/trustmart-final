@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustMart - Vehicles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustMart - Vehicles V2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
-        .back-btn { text-decoration: none; color: #27ae60; font-weight: bold; margin-bottom: 20px; display: inline-block; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .card-img { height: 180px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500') center/cover; }
-        .price { color: #27ae60; font-weight: bold; font-size: 22px; padding: 15px 15px 5px 15px; margin: 0; }
-        .wa-btn { display: block; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; margin: 15px; font-weight: bold; }
+        :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding: 20px; }
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .back-btn { text-decoration: none; color: var(--dark); font-size: 20px; border: 1px solid #ddd; padding: 5px 10px; border-radius: 8px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-img { height: 200px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600') center/cover; }
+        .card-info { padding: 15px; }
+        .price { color: var(--primary); font-size: 22px; font-weight: bold; margin: 0; }
+        .contact-btn { display: block; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; margin-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <div class="header">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+        <h2 style="margin:0;">Vehicles V2</h2>
+    </div>
+
     <div class="card">
         <div class="card-img"></div>
-        <p class="price">K 145,000</p>
-        <p style="padding: 0 15px;">Toyota Corolla - Silver</p>
-        <a href="https://wa.me/260979710270" class="wa-btn">Enquire on WhatsApp</a>
+        <div class="card-info">
+            <p class="price">K 145,000</p>
+            <p style="font-weight:600; margin:5px 0;">Toyota Corolla - Silver</p>
+            <p style="color:#888; font-size:14px;">Kitwe, Zambia</p>
+            <a href="https://wa.me/260979710270?text=Is%20the%20Toyota%20Corolla%20still%20available?" class="contact-btn">
+                <i class="fab fa-whatsapp"></i> Chat with Seller
+            </a>
+        </div>
     </div>
+
 </body>
 </html>
-
