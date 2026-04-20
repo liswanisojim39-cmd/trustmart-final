@@ -3,202 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustMart - Zambia's Marketplace</title>
+    <title>TrustMart - Zambia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #27ae60;
-            --dark: #2c3e50;
-            --light: #f4f7f6;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            padding-bottom: 100px;
-        }
-
-        /* Hero & Search */
-        .header {
-            background: linear-gradient(135deg, var(--primary), #2ecc71);
-            color: white;
-            padding: 30px 20px 50px 20px;
-            text-align: center;
-            border-radius: 0 0 25px 25px;
-        }
-
-        .header h1 { margin: 0; font-size: 28px; }
-        
-        .search-container {
-            margin: -25px 20px 20px 20px;
-        }
-
-        .search-bar {
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .search-bar input {
-            border: none;
-            outline: none;
-            width: 100%;
-            margin-left: 10px;
-            font-size: 14px;
-        }
-
-        /* Categories */
-        .section-title {
-            padding: 0 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--dark);
-            margin: 10px 0;
-        }
-
-        .cat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 0 20px;
-        }
-
-        .cat-item {
-            text-align: center;
-            text-decoration: none;
-            color: var(--dark);
-        }
-
-        .cat-icon {
-            background: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 5px auto;
-            color: var(--primary);
-            font-size: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-        }
-
-        .cat-item span { font-size: 10px; font-weight: 600; }
-
-        /* Listing Card */
-        .feed { padding: 20px; }
-        
-        .card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .card-img {
-            height: 200px;
-            background: #eee url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500') center/cover;
-        }
-
-        .card-body { padding: 15px; position: relative; }
-        .card-price { color: var(--primary); font-weight: bold; font-size: 18px; }
-        .card-title { font-size: 15px; margin: 5px 0; color: var(--dark); }
-        .card-loc { font-size: 12px; color: #888; }
-
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #eee;
-            z-index: 1000;
-        }
-
-        .nav-item {
-            text-align: center;
-            text-decoration: none;
-            color: #bdc3c7;
-            font-size: 12px;
-        }
-
-        .nav-item.active { color: var(--primary); }
-        .nav-item i { font-size: 20px; display: block; }
-
-        .add-btn {
-            background: var(--primary);
-            color: white !important;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-top: -25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-        }
+        :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 80px; }
+        .header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-radius: 0 0 25px 25px; }
+        .section-title { padding: 20px; font-size: 18px; font-weight: bold; color: var(--dark); }
+        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 20px; }
+        .cat-item { background: white; padding: 20px 10px; border-radius: 15px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .cat-item i { font-size: 24px; color: var(--primary); margin-bottom: 10px; display: block; }
+        .cat-item span { font-size: 11px; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>Trust<b>Mart</b></h1>
-    </div>
-
-    <div class="search-container">
-        <div class="search-bar">
-            <i class="fas fa-search" style="color: #ccc;"></i>
-            <input type="text" placeholder="Search for houses, cars, phones...">
-        </div>
+        <p>Explore Zambian Listings</p>
     </div>
 
     <h2 class="section-title">Categories</h2>
     <div class="cat-grid">
-        <a href="https://wa.me/260979710270?text=Property" class="cat-item">
-            <div class="cat-icon"><i class="fas fa-home"></i></div>
-            <span>House</span>
+        <a href="property.html" class="cat-item">
+            <i class="fas fa-home"></i>
+            <span>Property</span>
         </a>
-        <a href="https://wa.me/260979710270?text=Vehicles" class="cat-item">
-            <div class="cat-icon"><i class="fas fa-car"></i></div>
-            <span>Cars</span>
+        
+        <a href="vehicles.html" class="cat-item">
+            <i class="fas fa-car"></i>
+            <span>Vehicles</span>
         </a>
-        <a href="https://wa.me/260979710270?text=Jobs" class="cat-item">
-            <div class="cat-icon"><i class="fas fa-briefcase"></i></div>
-            <span>Jobs</span>
-        </a>
-        <a href="https://wa.me/260979710270?text=Services" class="cat-item">
-            <div class="cat-icon"><i class="fas fa-tools"></i></div>
-            <span>Services</span>
+
+        <a href="electronics.html" class="cat-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Electronics</span>
         </a>
     </div>
 
-    <div class="feed">
-        <h2 class="section-title" style="padding:0; margin-bottom:15px;">Recent Ads</h2>
-        <div class="card">
-            <div class="card-img"></div>
-            <div class="card-body">
-                <p class="card-price">K 850,000</p>
-                <p class="card-title">Newly Built 2-Bedroom House</p>
-                <p class="card-loc"><i class="fas fa-map-marker-alt"></i> Meanwood, Lusaka</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fas fa-home"></i>Home</a>
-        <a href="#" class="nav-item"><i class="fas fa-heart"></i>Saved</a>
-        <a href="https://wa.me/260979710270?text=I%20want%20to%20sell" class="nav-item add-btn"><i class="fas fa-plus"></i></a>
-        <a href="#" class="nav-item"><i class="fas fa-bell"></i>Alerts</a>
-        <a href="#" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+    <div style="margin: 30px 20px; padding: 20px; background: white; border-radius: 15px; text-align: center;">
+        <h3 style="margin: 0; color: var(--dark);">Sell Something?</h3>
+        <p style="font-size: 13px; color: #666;">Click the button below to message the admin.</p>
+        <a href="https://wa.me/260979710270" style="color: var(--primary); font-weight: bold; text-decoration: none;">Contact Admin</a>
     </div>
 
 </body>
