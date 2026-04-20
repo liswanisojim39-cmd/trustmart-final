@@ -10,6 +10,7 @@
             --primary: #27ae60;
             --dark: #2c3e50;
             --light: #f4f7f6;
+            --accent: #e67e22;
         }
 
         body {
@@ -45,7 +46,10 @@
             padding: 0 20px;
             font-size: 18px;
             color: var(--dark);
-            margin-bottom: 10px;
+            margin: 20px 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .cat-grid {
@@ -63,30 +67,58 @@
             text-decoration: none;
             color: var(--dark);
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: 0.2s;
         }
 
-        .cat-card:active { transform: scale(0.9); }
-        .cat-card i {
-            font-size: 24px;
-            color: var(--primary);
-            margin-bottom: 8px;
+        .cat-card i { font-size: 24px; color: var(--primary); margin-bottom: 8px; display: block; }
+        .cat-card span { font-size: 11px; font-weight: 600; }
+
+        /* Listing Cards */
+        .listing-container {
+            padding: 0 20px;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: inherit;
             display: block;
         }
-        .cat-card span { font-size: 12px; font-weight: 600; }
 
-        .safety-banner {
-            margin: 25px 20px;
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        .listing-img {
+            width: 100%;
+            height: 180px;
+            background-color: #ddd;
+            background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=500');
+            background-size: cover;
+            background-position: center;
         }
-        .safety-banner i { color: #856404; font-size: 20px; }
-        .safety-banner p { margin: 0; font-size: 12px; color: #856404; line-height: 1.4; }
+
+        .listing-info {
+            padding: 15px;
+        }
+
+        .price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 5px 0;
+            color: var(--dark);
+        }
+
+        .location {
+            font-size: 12px;
+            color: #777;
+        }
 
         .btn-post {
             position: fixed;
@@ -116,30 +148,39 @@
 
     <div class="user-status-card">
         <span style="color:var(--primary); font-weight: bold;">Marketplace Active</span>
-        <span style="font-size: 12px; color: #777;">Zambia</span>
+        <span style="font-size: 12px; color: #777;">Lusaka, Zambia</span>
     </div>
 
-    <h2 class="section-title">Explore Categories</h2>
+    <h2 class="section-title">Categories</h2>
     <div class="cat-grid">
         <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20Property" class="cat-card">
             <i class="fas fa-home"></i>
             <span>Property</span>
         </a>
-        
         <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20a%20Vehicle" class="cat-card">
             <i class="fas fa-car"></i>
             <span>Vehicles</span>
         </a>
-
         <a href="https://wa.me/260979710270?text=I%20am%20looking%20for%20Electronics" class="cat-card">
             <i class="fas fa-mobile-alt"></i>
             <span>Electronics</span>
         </a>
     </div>
 
-    <div class="safety-banner">
-        <i class="fas fa-shield-alt"></i>
-        <p><b>Safety First:</b> Always meet in public places and never send money before seeing the item.</p>
+    <div class="section-title">
+        <span>Featured Listings</span>
+        <a href="#" style="font-size: 12px; color: var(--primary); text-decoration: none;">View All</a>
+    </div>
+
+    <div class="listing-container">
+        <a href="https://wa.me/260979710270?text=Is%20the%203-Bedroom%20House%20in%20Lusaka%20still%20available?" class="listing-card">
+            <div class="listing-img"></div>
+            <div class="listing-info">
+                <p class="price">K 1,200,000</p>
+                <p class="title">Modern 3-Bedroom House</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Avondale, Lusaka</p>
+            </div>
+        </a>
     </div>
 
     <a href="https://wa.me/260979710270?text=Hello!%20I%20want%20to%20list%20an%20item%20on%20TrustMart" class="btn-post">
