@@ -7,19 +7,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 80px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 100px; }
         
-        /* New Community Banner */
-        .community-banner {
-            background: #fff3cd;
-            padding: 15px;
-            margin: 15px;
-            border-radius: 12px;
+        .header { background: var(--primary); color: white; padding: 25px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+
+        /* The Image Slider Area */
+        .slider-section {
+            padding: 20px;
+            overflow-x: auto;
+            display: flex;
+            gap: 15px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Hides scrollbar on Firefox */
+        }
+        .slider-section::-webkit-scrollbar { display: none; /* Hides scrollbar on Chrome */ }
+
+        .slide {
+            min-width: 85%;
+            height: 150px;
+            background: var(--dark);
+            border-radius: 15px;
+            scroll-snap-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border: 1px solid #ffeeba;
+            padding: 20px;
+            color: white;
         }
-        .comm-text b { color: #856404; display: block; font-size: 14px; }
-        .comm-text span { font-size: 12px; color: #856404; }
-        .join-btn { background: #8
+
+        .slide-content h3 { margin: 0; font-size: 18px; }
+        .slide-content p { margin: 5px 0; font-size: 12px; opacity: 0.8; }
+        .slide-btn { background: var(--primary); color: white; text-decoration: none; padding: 5px 12px; border-radius: 5px; font-size: 11px; font-weight: bold; }
+
+        .section-title { padding: 0 20px; font-size: 18px; font-weight: bold; color: var(--dark); margin-bottom: 15px; }
+
+        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 20px; }
+        .cat-item { background: white; padding: 20px 10px; border-radius: 15px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .cat-item i { font-size: 24px; color: var(--primary); margin-bottom: 10px; display: block; }
+        .cat-item span { font-size: 11px; font-weight: 600; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; }
+        .nav-link { text-decoration: none; color: #888; font-size: 10px; text-align: center; }
+        .nav-link.active { color: var(--primary); }
+        .nav-link i { font-size: 20px; display: block; margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Trust<b>Mart</b></h1>
+        <i class="fas fa-bell"></i>
+    </div>
+
+    <div class="slider-section">
+        <div class="slide" style="background-image: linear-gradient(to right, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1582408921715-18e7806367c1?w=500');">
+            <div class="slide-content">
+                <h3>New Listings</h3>
+                <p>Houses in Lusaka starting from K500k</p>
+                <a href="property.html" class="slide-btn">View More</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(to right, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=500');">
+            <div class="slide-content">
+                <h3>Phone Deals</h3>
+                <p>Latest iPhones & Samsung available</p>
+                <a href="electronics.html" class="slide-btn">Shop Now</a>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">Browse Categories</h2>
+    <div class="cat-grid">
+        <a href="property.html" class="cat-item">
+            <i class="fas fa-home"></i>
+            <span>Property</span>
+        </a>
+        <a href="vehicles.html" class="cat-item">
+            <i class="fas fa-car"></i>
+            <span>Vehicles</span>
+        </a>
+        <a href="electronics.html" class="cat-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Electronics</span>
+        </a>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i>Home</a>
+        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-plus-circle"></i>Sell</a>
+        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-headset"></i>Support</a>
+    </div>
+
+</body>
+</html>
