@@ -12,28 +12,33 @@
         .header { background: var(--primary); color: white; padding: 20px; text-align: center; }
         .header h1 { margin: 0; font-size: 24px; }
 
-        /* Simplified Slider */
-        .promo-banner {
-            background: var(--dark);
-            color: white;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500');
-            background-size: cover;
+        /* Search Section */
+        .search-area { padding: 15px; }
+        .search-box {
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+            font-size: 16px;
         }
 
         .section-title { padding: 10px 20px; font-size: 18px; font-weight: bold; }
 
         .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
-        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s; }
         .cat-item i { font-size: 20px; color: var(--primary); margin-bottom: 8px; display: block; }
         .cat-item span { font-size: 11px; font-weight: 600; }
 
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #ddd; }
-        .nav-link { text-decoration: none; color: #888; font-size: 11px; }
-        .nav-link i { display: block; font-size: 18px; margin-bottom: 3px; }
+        .nav-link { text-decoration: none; color: #888; font-size: 11px; text-align: center; }
     </style>
 </head>
 <body>
@@ -42,14 +47,15 @@
         <h1>Trust<b>Mart</b></h1>
     </div>
 
-    <div class="promo-banner">
-        <h3 style="margin:0;">Featured Property</h3>
-        <p style="font-size: 12px; opacity: 0.9;">Best deals in Lusaka this week</p>
-        <a href="property.html" style="color: white; font-weight: bold; font-size: 12px;">View Listings →</a>
+    <div class="search-area">
+        <div class="search-box">
+            <i class="fas fa-search" style="color: #999;"></i>
+            <input type="text" id="searchInput" onkeyup="filterCategories()" placeholder="Search categories...">
+        </div>
     </div>
 
     <h2 class="section-title">Categories</h2>
-    <div class="cat-grid">
+    <div class="cat-grid" id="categoryGrid">
         <a href="property.html" class="cat-item">
             <i class="fas fa-home"></i>
             <span>Property</span>
@@ -65,10 +71,27 @@
     </div>
 
     <div class="bottom-nav">
-        <a href="index.html" class="nav-link" style="color: var(--primary);"><i class="fas fa-home"></i>Home</a>
-        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-plus-circle"></i>Sell</a>
-        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-headset"></i>Help</a>
+        <a href="index.html" class="nav-link" style="color: var(--primary);"><i class="fas fa-home"></i><br>Home</a>
+        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-plus-circle"></i><br>Sell</a>
+        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-headset"></i><br>Help</a>
     </div>
+
+    <script>
+        function filterCategories() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let grid = document.getElementById('categoryGrid');
+            let items = grid.getElementsByClassName('cat-item');
+
+            for (let i = 0; i < items.length; i++) {
+                let title = items[i].getElementsByTagName('span')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
