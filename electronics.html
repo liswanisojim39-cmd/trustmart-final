@@ -1,25 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrustMart - Electronics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
-        .back-btn { text-decoration: none; color: #27ae60; font-weight: bold; margin-bottom: 20px; display: inline-block; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .card-img { height: 180px; background: #ddd url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500') center/cover; }
-        .price { color: #27ae60; font-weight: bold; font-size: 22px; padding: 15px 15px 5px 15px; margin: 0; }
-        .wa-btn { display: block; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; margin: 15px; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding-bottom: 20px; }
+        
+        .header { background: #27ae60; color: white; padding: 20px; display: flex; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
+        .back-btn { color: white; text-decoration: none; font-size: 20px; }
+        
+        /* Electronics Filters */
+        .filter-bar { background: white; padding: 10px 15px; display: flex; gap: 10px; overflow-x: auto; border-bottom: 1px solid #eee; scrollbar-width: none; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .filter-item { background: #f0f2f0; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; border: none; }
+        .filter-item.active { background: #27ae60; color: white; }
+
+        .container { padding: 15px; }
+        
+        /* Electronics Card */
+        .e-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); text-decoration: none; color: inherit; display: flex; align-items: center; }
+        .e-img { width: 120px; height: 120px; background-size: cover; background-position: center; flex-shrink: 0; }
+        
+        .e-info { padding: 15px; flex-grow: 1; }
+        .e-title { font-size: 15px; font-weight: bold; margin: 0; color: #2c3e50; }
+        .e-price { color: #27ae60; font-size: 17px; font-weight: 800; margin: 5px 0; }
+        
+        .e-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; margin-bottom: 5px; }
+        .new { background: #e8f5e9; color: #2e7d32; }
+        .used { background: #fff3e0; color: #ef6c00; }
+
+        .e-meta { font-size: 11px; color: #7f8c8d; display: flex; gap: 10px; }
+        .wa-small-btn { background: #25d366; color: white; padding: 8px; border-radius: 8px; text-align: center; text-decoration: none; display: block; margin-top: 10px; font-size: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
-    <div class="card">
-        <div class="card-img"></div>
-        <p class="price">K 12,500</p>
-        <p style="padding: 0 15px;">iPhone 13 Pro Max - 256GB</p>
-        <a href="https://wa.me/260979710270" class="wa-btn">Enquire on WhatsApp</a>
+
+    <div class="header">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <h1 style="margin:0; font-size: 20px;">Electronics</h1>
     </div>
+
+    <div class="filter-bar">
+        <button class="filter-item active">All Items</button>
+        <button class="filter-item">Phones</button>
+        <button class="filter-item">Laptops</button>
+        <button class="filter-item">Tablets</button>
+        <button class="filter-item">Audio</button>
+    </div>
+
+    <div class="container">
+        <div class="e-card">
+            <div class="e-img" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300');"></div>
+            <div class="e-info">
+                <span class="e-badge used">PRE-OWNED</span>
+                <p class="e-title">iPhone 13 Pro - 256GB</p>
+                <p class="e-price">K 12,500</p>
+                <div class="e-meta">
+                    <span><i class="fas fa-battery-three-quarters"></i> 89% Health</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Lusaka</span>
+                </div>
+                <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20iPhone%2013%20Pro" class="wa-small-btn">
+                    Chat with Seller
+                </a>
+            </div>
+        </div>
+
+        <div class="e-card" style="margin-top: 15px;">
+            <div class="e-img" style="background-image: url('https://images.unsplash.com/photo-1517336714460-d15083f2ae2a?w=300');"></div>
+            <div class="e-info">
+                <span class="e-badge new">BRAND NEW</span>
+                <p class="e-title">MacBook Air M2 (2022)</p>
+                <p class="e-price">K 18,500</p>
+                <div class="e-meta">
+                    <span><i class="fas fa-memory"></i> 8GB RAM</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Ndola</span>
+                </div>
+                <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20MacBook%20Air" class="wa-small-btn">
+                    Chat with Seller
+                </a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
