@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell - TrustMart</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="index.html" style="color:#27ae60; text-decoration:none;">← Back</a>
+    <div class="card">
+        <h2>Post an Ad</h2>
+        <input type="text" id="t" placeholder="Item name">
+        <input type="number" id="p" placeholder="Price (K)">
+        <textarea id="d" rows="4" placeholder="Details..."></textarea>
+        <button class="btn" onclick="go()">Post to WhatsApp</button>
+    </div>
+    <script>
+        function go() {
+            const t = document.getElementById('t').value;
+            const p = document.getElementById('p').value;
+            const d = document.getElementById('d').value;
+            window.location.href = `https://wa.me/260979710270?text=I want to sell: ${t} for K${p}. Details: ${d}`;
+        }
+    </script>
+</body>
+</html>
