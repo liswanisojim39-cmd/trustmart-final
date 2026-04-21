@@ -6,38 +6,92 @@
     <title>TrustMart Zambia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; --urgent: #e74c3c; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 100px; }
+        :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
         
-        .header { background: var(--primary); color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .header h1 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--light); 
+            color: var(--dark);
+            margin: 0; 
+            padding-bottom: 100px; 
+        }
+        
+        .header { 
+            background: var(--primary); 
+            color: white; 
+            padding: 25px 20px; 
+            text-align: center; 
+        }
+        .header h1 { margin: 0; font-size: 24px; font-weight: 800; }
 
         .search-area { padding: 15px; }
-        .search-box { background: white; display: flex; align-items: center; padding: 12px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-size: 16px; }
+        .search-box { 
+            background: white; 
+            display: flex; 
+            align-items: center; 
+            padding: 12px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-size: 16px; background: transparent; }
 
-        .section-header { padding: 15px 20px 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .section-header h2 { font-size: 14px; margin: 0; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+        .section-header { padding: 15px 20px 5px 20px; font-size: 14px; font-weight: 800; color: #888; text-transform: uppercase; }
 
         /* Brand Scroller */
-        .brand-scroller { display: flex; gap: 20px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
+        .brand-scroller { display: flex; gap: 15px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
         .brand-scroller::-webkit-scrollbar { display: none; }
-        .brand-item { min-width: 80px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #ddd; font-size: 12px; border: 1px solid #eee; }
+        .brand-item { 
+            min-width: 90px; 
+            background: white; 
+            padding: 10px; 
+            border-radius: 10px; 
+            text-align: center; 
+            font-size: 12px; 
+            font-weight: bold; 
+            border: 1px solid #eee;
+        }
 
-        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
-        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .cat-item i { font-size: 20px; color: var(--primary); margin-bottom: 8px; display: block; }
+        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 20px; }
+        .cat-item { 
+            background: white; 
+            padding: 20px 10px; 
+            border-radius: 15px; 
+            text-align: center; 
+            text-decoration: none; 
+            color: var(--dark); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+        }
+        .cat-item i { font-size: 22px; color: var(--primary); margin-bottom: 8px; display: block; }
         .cat-item span { font-size: 11px; font-weight: 600; }
 
-        .featured-card { background: white; border-radius: 15px; overflow: hidden; margin: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-decoration: none; color: inherit; display: block; position: relative; }
-        .badge { position: absolute; top: 10px; left: 10px; background: var(--urgent); color: white; padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; }
-        .card-img { width: 100%; height: 160px; background-size: cover; background-position: center; }
-        .card-info { padding: 12px; }
-        .card-price { color: var(--primary); font-weight: bold; font-size: 18px; margin: 0; }
+        .featured-card { 
+            background: white; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            margin: 20px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            text-decoration: none; 
+            color: inherit; 
+            display: block; 
+        }
+        .card-img { width: 100%; height: 180px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600') center/cover; }
+        .card-info { padding: 15px; }
+        .price { color: var(--primary); font-size: 20px; font-weight: bold; margin: 0; }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-link { text-decoration: none; color: #888; font-size: 11px; text-align: center; }
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background: white; 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 15px 0; 
+            border-top: 1px solid #eee; 
+            z-index: 9999;
+        }
+        .nav-link { text-decoration: none; color: #aaa; font-size: 11px; text-align: center; }
         .nav-link.active { color: var(--primary); }
+        .nav-link i { font-size: 20px; margin-bottom: 4px; display: block; }
     </style>
 </head>
 <body>
@@ -47,4 +101,42 @@
     </div>
 
     <div class="search-area">
-        <div class="search-box
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search categories...">
+        </div>
+    </div>
+
+    <div class="section-header">Top Brands</div>
+    <div class="brand-scroller">
+        <div class="brand-item"><i class="fab fa-apple"></i> Apple</div>
+        <div class="brand-item"><i class="fas fa-car"></i> Toyota</div>
+        <div class="brand-item"><i class="fas fa-tv"></i> Samsung</div>
+        <div class="brand-item"><i class="fas fa-laptop"></i> HP</div>
+    </div>
+
+    <div class="section-header">Browse Categories</div>
+    <div class="cat-grid">
+        <a href="property.html" class="cat-item"><i class="fas fa-home"></i><span>Property</span></a>
+        <a href="vehicles.html" class="cat-item"><i class="fas fa-car"></i><span>Vehicles</span></a>
+        <a href="electronics.html" class="cat-item"><i class="fas fa-mobile-alt"></i><span>Electronics</span></a>
+    </div>
+
+    <div class="section-header">Hot Deal</div>
+    <a href="vehicles.html" class="featured-card">
+        <div class="card-img"></div>
+        <div class="card-info">
+            <p class="price">K 145,000</p>
+            <p style="margin: 5px 0; font-weight: 600;">Toyota Corolla 2016</p>
+            <p style="color: #888; font-size: 12px;"><i class="fas fa-map-marker-alt"></i> Kitwe, Zambia</p>
+        </div>
+    </a>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i>Home</a>
+        <a href="sell.html" class="nav-link"><i class="fas fa-plus-circle"></i>Sell</a>
+        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-comment-alt"></i>Support</a>
+    </div>
+
+</body>
+</html>
