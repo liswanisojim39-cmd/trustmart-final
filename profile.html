@@ -3,117 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - TrustMart Zeta</title>
+    <title>My Profile - Zeta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <style>
-        :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; --fb-blue: #1877f2; --gold: #fbbf24; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 100px; color: #1c1e21; }
+        :root { --primary: #27ae60; --zeta: #2c3e50; --fb-blue: #1877f2; --gold: #fbbf24; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 100px; }
         
-        /* Cover & Profile Header */
-        .cover-photo { width: 100%; height: 180px; background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800') center/cover; position: relative; }
-        .zeta-tag { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(5px); }
+        .cover { width: 100%; height: 160px; background: #2c3e50; position: relative; }
+        .profile-header { background: white; padding: 0 20px 20px; border-bottom: 1px solid #ddd; }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; background: #999; margin-top: -50px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        .profile-header { background: white; padding: 0 20px 20px; border-bottom: 1px solid #ddd; position: relative; }
-        .avatar-row { display: flex; justify-content: space-between; align-items: flex-end; margin-top: -50px; }
-        .avatar { width: 110px; height: 110px; border-radius: 50%; border: 4px solid white; background: var(--zeta); color: white; display: flex; align-items: center; justify-content: center; font-size: 45px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 5; }
-        
-        .name-section { margin-top: 15px; }
-        .name { font-size: 24px; font-weight: 800; margin: 0; color: var(--zeta); display: flex; align-items: center; gap: 8px; }
-        .location { color: #65676b; font-size: 14px; margin: 5px 0; font-weight: 500; }
-        .bio { font-size: 14px; line-height: 1.5; color: #1c1e21; margin: 15px 0; }
-
-        /* Quick Action Dashboard */
-        .action-grid { display: flex; gap: 10px; margin-bottom: 20px; }
-        .btn-action { flex: 1; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .action-grid { display: flex; gap: 10px; margin: 20px 0; }
+        .btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; text-decoration: none; font-size: 13px; }
         .btn-blue { background: var(--fb-blue); color: white; }
-        .btn-gray { background: #e4e6eb; color: #050505; }
+        .btn-auth { background: #fff; border: 1px solid #ddd; color: #555; cursor: pointer; }
 
-        /* Stats Strip */
-        .stats-strip { display: flex; border-top: 1px solid #ebedf0; padding-top: 15px; }
-        .stat-box { flex: 1; text-align: center; }
-        .stat-box b { display: block; font-size: 18px; color: var(--zeta); }
-        .stat-box span { font-size: 11px; color: #65676b; text-transform: uppercase; font-weight: bold; }
+        .menu-list { background: white; margin-top: 15px; }
+        .menu-item { display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
+        .menu-item i { width: 30px; color: #65676b; }
 
-        /* Menu List */
-        .menu-list { background: white; margin-top: 12px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
-        .menu-item { display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: #1c1e21; border-bottom: 1px solid #f0f2f5; font-size: 15px; font-weight: 500; }
-        .menu-item i { width: 30px; font-size: 18px; color: #65676b; }
-        .menu-item:last-child { border-bottom: none; }
-        .menu-item b { color: var(--gold); }
-
-        .container { padding: 20px; }
-        .section-title { font-size: 17px; font-weight: 700; margin-bottom: 15px; color: var(--zeta); }
-
-        /* Footer Nav */
-        .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
+        /* ADMIN BUTTON - HIDDEN BY DEFAULT */
+        #adminSection { display: none; padding: 20px; background: #fff; margin-top: 15px; text-align: center; border: 2px dashed var(--fb-blue); }
+        
+        .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
         .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
         .f-link.active { color: var(--primary); }
-        .f-link i { font-size: 22px; display: block; margin-bottom: 4px; }
-
-        .admin-link { display: block; text-align: center; margin-top: 30px; color: #bcc0c4; text-decoration: none; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <div class="cover-photo">
-        <div class="zeta-tag">ZETA VERIFIED SELLER</div>
-    </div>
-    
+    <div class="cover"></div>
     <div class="profile-header">
-        <div class="avatar-row">
-            <div class="avatar"><i class="fas fa-user"></i></div>
-            <i class="fas fa-check-circle" style="color: var(--fb-blue); font-size: 24px; margin-bottom: 10px;"></i>
-        </div>
-        
-        <div class="name-section">
-            <h1 class="name">Zambian Trader</h1>
-            <p class="location"><i class="fas fa-map-marker-alt"></i> Chipata, Eastern Province</p>
-            <p class="bio">Expert in high-quality electronics and real estate listings. Trusted by 4,000+ Zambian buyers.</p>
-        </div>
+        <div class="avatar" id="userPhoto"><i class="fas fa-user"></i></div>
+        <h2 id="userName" style="margin: 10px 0 5px;">Guest User</h2>
+        <p id="userEmail" style="color: #666; font-size: 13px; margin: 0;">Sign in to sync your data</p>
 
         <div class="action-grid">
-            <a href="edit-profile.html" class="btn-action btn-blue"><i class="fas fa-pen"></i> Edit Profile</a>
-            <a href="sell.html" class="btn-action btn-gray"><i class="fas fa-plus"></i> List Item</a>
+            <button class="btn btn-auth" id="loginBtn" onclick="googleLogin()">
+                <i class="fab fa-google"></i> Google Login
+            </button>
+            <button class="btn btn-auth" id="logoutBtn" onclick="googleLogout()" style="display:none;">Logout</button>
         </div>
-        
-        <div class="stats-strip">
-            <div class="stat-box"><b>12</b><span>Ads</span></div>
-            <div class="stat-box"><b>45</b><span>Sold</span></div>
-            <div class="stat-box"><b>4.2k</b><span>Follows</span></div>
-        </div>
+    </div>
+
+    <div id="adminSection">
+        <b style="color: var(--fb-blue); display: block; margin-bottom: 10px;">Owner Detected</b>
+        <a href="admin.html" class="btn btn-blue" style="display: inline-block; width: 80%;">Open Admin Panel</a>
     </div>
 
     <div class="menu-list">
-        <a href="pro.html" class="menu-item">
-            <i class="fas fa-crown" style="color: var(--gold);"></i>
-            <span>Manage <b>Zeta Pro</b> Subscription</span>
-        </a>
-        <a href="verify.html" class="menu-item">
-            <i class="fas fa-user-shield" style="color: var(--fb-blue);"></i>
-            <span>Account Verification</span>
-        </a>
-        <a href="messages.html" class="menu-item">
-            <i class="fas fa-comment-dots"></i>
-            <span>Message Requests</span>
-        </a>
-        <a href="help.html" class="menu-item">
-            <i class="fas fa-question-circle"></i>
-            <span>Help & Support</span>
-        </a>
-        <a href="login.html" class="menu-item" style="color: #e74c3c;">
-            <i class="fas fa-sign-out-alt" style="color: #e74c3c;"></i>
-            <span>Log Out</span>
-        </a>
+        <a href="#" class="menu-item"><i class="fas fa-box"></i> My Listings</a>
+        <a href="#" class="menu-item"><i class="fas fa-heart"></i> Watchlist</a>
+        <a href="#" class="menu-item"><i class="fas fa-shield-alt"></i> Safety Center</a>
     </div>
-
-    <a href="admin.html" class="admin-link">Internal Admin Dashboard</a>
 
     <div class="footer">
         <a href="index.html" class="f-link"><i class="fas fa-home"></i>Home</a>
-        <a href="messages.html" class="f-link"><i class="fas fa-comment-dots"></i>Chats</a>
-        <a href="sell.html" class="f-link"><i class="fas fa-plus-circle"></i>Sell</a>
+        <a href="messages.html" class="f-link"><i class="fas fa-comment"></i>Chats</a>
         <a href="profile.html" class="f-link active"><i class="fas fa-user"></i>Profile</a>
     </div>
 
+    <script>
+        // REPLACE THIS WITH YOUR FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        // CHANGE THIS TO YOUR ACTUAL GOOGLE EMAIL
+        const OWNER_EMAIL = "your-email@gmail.com";
+
+        function googleLogin() {
+            auth.signInWithPopup(provider).then((result) => {
+                updateUI(result.user);
+            }).catch((error) => {
+                console.error("Login Failed", error);
+            });
+        }
+
+        function googleLogout() {
+            auth.signOut().then(() => {
+                location.reload();
+            });
+        }
+
+        function updateUI(user) {
+            if (user) {
+                document.getElementById('userName').innerText = user.displayName;
+                document.getElementById('userEmail').innerText = user.email;
+                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('logoutBtn').style.display = 'block';
+                
+                // Set Profile Photo
+                if(user.photoURL) {
+                    document.getElementById('userPhoto').innerHTML = `<img src="${user.photoURL}" style="width:100%; border-radius:50%">`;
+                }
+
+                // THE SECURITY CHECK
+                if (user.email === OWNER_EMAIL) {
+                    document.getElementById('adminSection').style.display = 'block';
+                    localStorage.setItem('zeta_admin', 'true'); // Pass for admin.html
+                }
+            }
+        }
+
+        // Check if user is already logged in on page load
+        auth.onAuthStateChanged(updateUI);
+    </script>
 </body>
 </html>
