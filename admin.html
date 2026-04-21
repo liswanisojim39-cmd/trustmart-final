@@ -3,41 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Restricted</title>
+    <title>Zeta Admin - Owner Access</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <style>
         body { font-family: sans-serif; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .gate-msg { text-align: center; padding: 20px; }
-        #adminContent { display: none; width: 100%; max-width: 600px; padding: 20px; }
+        #authCheck { text-align: center; }
+        #dashboard { display: none; width: 90%; max-width: 500px; background: #1e293b; padding: 30px; border-radius: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="gatekeeper" class="gate-msg">
-        <i class="fas fa-spinner fa-spin"></i>
-        <p>Verifying Identity...</p>
+    <div id="authCheck">
+        <p>Verifying Owner Identity...</p>
     </div>
 
-    <div id="adminContent">
-        <h1>Welcome Back, Owner</h1>
-        <p>Your Admin Panel is ready.</p>
-        <a href="profile.html" style="color: #38bdf8; text-decoration: none;">Exit Dashboard</a>
+    <div id="dashboard">
+        <h1 style="color: #38bdf8;">Control Panel</h1>
+        <hr style="border: 0.5px solid #334155;">
+        <p>Welcome, Liswaniso. System is online.</p>
+        <a href="profile.html" style="color: #65676b; text-decoration: none; font-size: 13px;">Exit Admin Mode</a>
     </div>
 
     <script>
-        // USE THE SAME CONFIG AS PROFILE.HTML
-        const firebaseConfig = { /* PASTE YOUR CONFIG HERE */ };
-        firebase.initializeApp(firebaseConfig);
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
+            authDomain: "trust-mart-73f8a.firebaseapp.com",
+            databaseURL: "https://trust-mart-73f8a-default-rtdb.firebaseio.com",
+            projectId: "trust-mart-73f8a",
+            storageBucket: "trust-mart-73f8a.firebasestorage.app",
+            messagingSenderId: "715567477271",
+            appId: "1:715567477271:web:0550e70b07f7db8e80a252"
+        };
 
+        firebase.initializeApp(firebaseConfig);
         const OWNER_EMAIL = "liswanisojim39@gmail.com";
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user && user.email === OWNER_EMAIL) {
-                document.getElementById('gatekeeper').style.display = 'none';
-                document.getElementById('adminContent').style.display = 'block';
+                document.getElementById('authCheck').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
             } else {
-                alert("Unauthorized! Returning to home.");
+                alert("Unauthorized Access Denied.");
                 window.location.href = "index.html";
             }
         });
