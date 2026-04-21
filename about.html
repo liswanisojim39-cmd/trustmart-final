@@ -9,24 +9,37 @@
         :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; color: #2c3e50; line-height: 1.6; }
         
-        .header { background: var(--zeta); color: white; padding: 60px 20px; text-align: center; border-radius: 0 0 40px 40px; position: relative; }
-        .back-btn { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 20px; }
-        .zeta-logo { font-size: 40px; font-weight: 900; letter-spacing: 5px; margin-bottom: 10px; }
+        /* Header */
+        .header { background: var(--zeta); color: white; padding: 60px 20px; text-align: center; border-radius: 0 0 40px 40px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .back-btn { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 20px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 50%; }
+        .zeta-logo { font-size: 45px; font-weight: 900; letter-spacing: 6px; margin-bottom: 5px; color: white; }
+        .tagline { opacity: 0.9; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
         
-        .container { padding: 30px 20px; }
+        .container { padding: 30px 20px; max-width: 600px; margin: 0 auto; }
         
-        .section { margin-bottom: 40px; }
-        .section h2 { color: var(--primary); font-size: 24px; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 15px; }
-        
-        .feature-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; align-items: flex-start; gap: 15px; }
-        .feature-card i { font-size: 24px; color: var(--primary); margin-top: 5px; }
-        .feature-text b { display: block; font-size: 16px; margin-bottom: 5px; }
-        .feature-text p { margin: 0; font-size: 14px; color: #7f8c8d; }
+        /* Sections */
+        .section { margin-bottom: 35px; }
+        .section h2 { color: var(--zeta); font-size: 22px; margin-bottom: 15px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .section p { font-size: 15px; color: #444; }
 
-        .mission-box { background: var(--primary); color: white; padding: 30px; border-radius: 20px; text-align: center; margin-top: 20px; }
-        .mission-box h3 { margin-top: 0; }
-        
-        .footer-tag { text-align: center; padding: 20px; font-size: 12px; color: #bdc3c7; letter-spacing: 2px; }
+        /* Feature Cards */
+        .feature-card { background: white; padding: 20px; border-radius: 18px; box-shadow: 0 6px 12px rgba(0,0,0,0.04); margin-bottom: 18px; display: flex; align-items: flex-start; gap: 15px; border: 1px solid #eee; }
+        .feature-card i { font-size: 24px; color: var(--primary); margin-top: 5px; }
+        .feature-text b { display: block; font-size: 16px; margin-bottom: 5px; color: var(--zeta); }
+        .feature-text p { margin: 0; font-size: 14px; color: #7f8c8d; line-height: 1.4; }
+
+        /* Mission Box */
+        .mission-box { background: var(--primary); color: white; padding: 30px; border-radius: 25px; text-align: center; margin: 40px 0; box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3); }
+        .mission-box i { font-size: 30px; margin-bottom: 15px; opacity: 0.8; }
+        .mission-box h3 { margin: 0 0 10px; font-size: 20px; }
+        .mission-box p { margin: 0; font-style: italic; font-size: 15px; opacity: 0.95; }
+
+        /* Legal Links */
+        .legal-area { text-align: center; padding: 20px 0; border-top: 1px solid #ddd; margin-top: 20px; }
+        .tnc-link { color: var(--primary); font-weight: 800; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .tnc-link:active { opacity: 0.7; }
+
+        .footer-tag { text-align: center; padding: 30px; font-size: 11px; color: #bdc3c7; letter-spacing: 3px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -34,49 +47,56 @@
     <div class="header">
         <a href="profile.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
         <div class="zeta-logo">ZETA</div>
-        <p style="opacity: 0.8; font-weight: 600;">The Future of Zambian Trade</p>
+        <div class="tagline">Engineered for Trust</div>
     </div>
 
     <div class="container">
         <div class="section">
-            <h2>Who We Are</h2>
-            <p>TrustMart is Zambia's premier digital marketplace, engineered by <b>Zeta Technologies</b>. We believe that buying and selling locally should be safe, fast, and transparent for every Zambian.</p>
+            <h2>The TrustMart Story</h2>
+            <p>TrustMart isn't just a classifieds site; it's a movement to digitize Zambian trade. Built on the <b>Zeta Ecosystem</b>, we bridge the gap between local sellers and buyers using seamless mobile technology.</p>
         </div>
 
         <div class="section">
-            <h2>Why TrustMart?</h2>
+            <h2>Zeta Core Features</h2>
             
             <div class="feature-card">
-                <i class="fas fa-shield-check"></i>
+                <i class="fas fa-user-check"></i>
                 <div class="feature-text">
-                    <b>Verified Listings</b>
-                    <p>We use Zeta-powered verification to ensure that the deals you see are real and reliable.</p>
+                    <b>Identity First</b>
+                    <p>We prioritize verified profiles to ensure every "Zambian Trader" you meet is a real person.</p>
                 </div>
             </div>
 
             <div class="feature-card">
-                <i class="fas fa-bolt"></i>
+                <i class="fas fa-comments-dollar"></i>
                 <div class="feature-text">
-                    <b>Instant Connection</b>
-                    <p>Direct WhatsApp integration means no middleman. You talk to the seller in real-time.</p>
+                    <b>No Middlemen</b>
+                    <p>Our Direct-to-WhatsApp protocol ensures you negotiate your own prices and keep 100% of your profit.</p>
                 </div>
             </div>
 
             <div class="feature-card">
-                <i class="fas fa-map-marked-alt"></i>
+                <i class="fas fa-shield-alt"></i>
                 <div class="feature-text">
-                    <b>Local First</b>
-                    <p>From Lusaka to Kasama, we focus on making trade easy within your own community.</p>
+                    <b>Zeta Security</b>
+                    <p>Encryption and safety guidelines built into the very core of our application layout.</p>
                 </div>
             </div>
         </div>
 
         <div class="mission-box">
+            <i class="fas fa-quote-left"></i>
             <h3>Our Mission</h3>
-            <p>"To empower Zambian entrepreneurs and consumers through world-class technology and trusted local commerce."</p>
+            <p>To provide every Zambian with a professional, secure, and world-class digital storefront that fits in their pocket.</p>
         </div>
 
-        <div class="footer-tag">TRUSTMART v1.0 • ZETA ECOSYSTEM</div>
+        <div class="legal-area">
+            <a href="tnc.html" class="tnc-link">
+                <i class="fas fa-file-contract"></i> REVIEW TERMS & CONDITIONS
+            </a>
+        </div>
+
+        <div class="footer-tag">TRUSTMART v1.0 • ZAMBIA</div>
     </div>
 
 </body>
