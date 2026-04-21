@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse - Trust Mart by Zeta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        .header { background: var(--primary); color: white; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .item-card { background: white; margin: 10px; border-radius: 10px; display: flex; padding: 10px; gap: 10px; }
+        .item-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" style="color: white;"><i class="fas fa-arrow-left"></i></a>
+        <h1 id="catTitle" style="font-size: 18px; margin: 0;">Category</h1>
+    </div>
+
+    <div id="itemList">
+        <p style="padding: 20px; color: #666;">Showing the latest listings...</p>
+    </div>
+
+    <script>
+        // Simple logic to show which category we are in
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type') || 'Items';
+        document.getElementById('catTitle').innerText = type.charAt(0).toUpperCase() + type.slice(1);
+    </script>
+</body>
+</html>
