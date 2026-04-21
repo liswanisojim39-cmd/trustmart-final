@@ -3,31 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse - Trust Mart by Zeta</title>
+    <title>Category - Trust Mart by Zeta</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --zeta: #2c3e50; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
-        .header { background: var(--primary); color: white; padding: 20px; display: flex; align-items: center; gap: 15px; }
-        .item-card { background: white; margin: 10px; border-radius: 10px; display: flex; padding: 10px; gap: 10px; }
-        .item-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+        body { font-family: sans-serif; background: #f4f7f6; margin: 0; }
+        .header { background: #27ae60; color: white; padding: 20px; display: flex; align-items: center; gap: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; }
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card-info { padding: 10px; }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="index.html" style="color: white;"><i class="fas fa-arrow-left"></i></a>
-        <h1 id="catTitle" style="font-size: 18px; margin: 0;">Category</h1>
+        <a href="index.html" style="color:white"><i class="fas fa-arrow-left"></i></a>
+        <h1 id="title" style="font-size: 18px; margin:0; text-transform: capitalize;">Category</h1>
     </div>
-
-    <div id="itemList">
-        <p style="padding: 20px; color: #666;">Showing the latest listings...</p>
-    </div>
+    <div class="grid" id="grid"></div>
 
     <script>
-        // Simple logic to show which category we are in
-        const urlParams = new URLSearchParams(window.location.search);
-        const type = urlParams.get('type') || 'Items';
-        document.getElementById('catTitle').innerText = type.charAt(0).toUpperCase() + type.slice(1);
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
+            authDomain: "trust-mart-73f8a.firebaseapp.com",
+            projectId: "trust-mart-73f8a",
+            storageBucket: "trust-mart-73f8a.firebasestorage.app",
+            messagingSenderId: "715567477271",
+            appId: "1:715567477271:web:0550e70b07f7db8e80a252"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const type = new URLSearchParams(window.location.search).get('type');
+        document.getElementById('title').innerText = type;
+
+        db.collection("ads").where("category", "==", type).where("status", "==", "approved")
+            .onSnapshot(snap => {
+                const grid = document.getElementById('grid');
+                grid.innerHTML = "";
+                snap.forEach(doc => {
+                    const ad = doc.data();
+                    grid.innerHTML += `<div class="card"><div class="card-info"><strong>K${ad.price}</strong><br><small>${ad.title}</small></div></div>`;
+                });
+            });
     </script>
 </body>
 </html>
