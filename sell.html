@@ -3,30 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sell - TrustMart</title>
+    <title>Sell Item - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 80px; }
+        .header { background: var(--primary); color: white; padding: 20px; text-align: center; font-weight: bold; }
+        .container { padding: 20px; }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 13px; font-weight: bold; color: var(--zeta); margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 14px; }
+        
+        .upload-box { background: white; border: 2px dashed #ddd; border-radius: 15px; padding: 30px; text-align: center; color: #888; margin-bottom: 20px; cursor: pointer; }
+        .upload-box i { font-size: 30px; display: block; margin-bottom: 10px; color: var(--primary); }
+        
+        .submit-btn { background: var(--primary); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
+        .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
+        .f-link.active { color: var(--primary); }
+        .f-link i { font-size: 22px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
-    <a href="index.html" style="color:#27ae60; text-decoration:none;">← Back</a>
-    <div class="card">
-        <h2>Post an Ad</h2>
-        <input type="text" id="t" placeholder="Item name">
-        <input type="number" id="p" placeholder="Price (K)">
-        <textarea id="d" rows="4" placeholder="Details..."></textarea>
-        <button class="btn" onclick="go()">Post to WhatsApp</button>
+
+    <div class="header">Post New Listing</div>
+
+    <div class="container">
+        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+            <i class="fas fa-camera"></i>
+            <span>Add Photos (Max 5)</span>
+            <input type="file" id="fileInput" style="display:none" multiple>
+        </div>
+
+        <div class="form-group">
+            <label>Item Category</label>
+            <select>
+                <option>Vehicles</option>
+                <option>Property</option>
+                <option>Electronics</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" placeholder="e.g. Toyota Corolla 2016">
+        </div>
+
+        <div class="form-group">
+            <label>Price (ZMW)</label>
+            <input type="number" placeholder="Enter amount">
+        </div>
+
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" placeholder="e.g. Lusaka, Zambia">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea rows="4" placeholder="Describe your item..."></textarea>
+        </div>
+
+        <button class="submit-btn" onclick="location.href='success.html'">Post Listing Now</button>
     </div>
-    <script>
-        function go() {
-            const t = document.getElementById('t').value;
-            const p = document.getElementById('p').value;
-            const d = document.getElementById('d').value;
-            window.location.href = `https://wa.me/260979710270?text=I want to sell: ${t} for K${p}. Details: ${d}`;
-        }
-    </script>
+
+    <div class="footer">
+        <a href="index.html" class="f-link"><i class="fas fa-home"></i>Home</a>
+        <a href="sell.html" class="f-link active"><i class="fas fa-plus-circle"></i>Sell</a>
+        <a href="profile.html" class="f-link"><i class="fas fa-user"></i>Profile</a>
+    </div>
+
 </body>
 </html>
