@@ -3,29 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeta Admin - Owner Access</title>
+    <title>TrustMart Control Room - Owner Only</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        #authCheck { text-align: center; }
-        #dashboard { display: none; width: 90%; max-width: 500px; background: #1e293b; padding: 30px; border-radius: 20px; }
+        :root { --dark-bg: #0f172a; --card-bg: #1e293b; --accent: #38bdf8; --danger: #ef4444; --success: #22c55e; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: white; margin: 0; padding: 20px; }
+        
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .owner-badge { background: rgba(56, 189, 248, 0.2); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid var(--accent); }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: var(--card-bg); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .stat-card small { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-card h2 { margin: 10px 0 0; font-size: 22px; }
+
+        /* Moderation List */
+        .mod-section { background: var(--card-bg); border-radius: 20px; padding: 20px; }
+        .mod-item { background: #334155; padding: 15px; border-radius: 12px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .item-info b { display: block; font-size: 14px; margin-bottom: 4px; }
+        .item-info small { color: #cbd5e1; font-size: 11px; }
+        
+        .action-btns { display: flex; gap: 8px; }
+        .action-btns button { border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px; color: white; }
+        .btn-approve { background: var(--success); }
+        .btn-reject { background: var(--danger); }
+
+        #auth-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-bg); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     </style>
 </head>
 <body>
 
-    <div id="authCheck">
+    <div id="auth-overlay">
+        <i class="fas fa-shield-alt fa-spin" style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
         <p>Verifying Owner Identity...</p>
     </div>
 
-    <div id="dashboard">
-        <h1 style="color: #38bdf8;">Control Panel</h1>
-        <hr style="border: 0.5px solid #334155;">
-        <p>Welcome, Liswaniso. System is online.</p>
-        <a href="profile.html" style="color: #65676b; text-decoration: none; font-size: 13px;">Exit Admin Mode</a>
+    <div class="admin-header">
+        <div>
+            <h1 style="font-size: 20px; margin: 0;">Zeta Central</h1>
+            <small style="color: #94a3b8;">Welcome back, Liswaniso</small>
+        </div>
+        <div class="owner-badge">OWNER MODE</div>
     </div>
 
+    <div class="stats-grid">
+        <div class="stat-card">
+            <small>Live Ads</small>
+            <h2>1,204</h2>
+        </div>
+        <div class="stat-card">
+            <small>Revenue</small>
+            <h2 style="color: var(--success);">K 14,250</h2>
+        </div>
+    </div>
+
+    <div class="mod-section">
+        <h3 style="margin-top: 0; font-size: 16px;"><i class="fas fa-clock" style="color: var(--accent);"></i> Pending Review</h3>
+        <hr style="border: 0.5px solid #475569; opacity: 0.3;">
+
+        <div class="mod-item" id="ad-1">
+            <div class="item-info">
+                <b>Toyota Mark X - K 95,000</b>
+                <small>By: brian_k@gmail.com • Lusaka</small>
+            </div>
+            <div class="action-btns">
+                <button class="btn-approve" onclick="approveAd(1)">Approve</button>
+                <button class="btn-reject" onclick="rejectAd(1)">Delete</button>
+            </div>
+        </div>
+
+        <div class="mod-item" id="ad-2">
+            <div class="item-info">
+                <b>iPhone 15 Pro - K 22,000</b>
+                <small>By: mutale_m@gmail.com • Kitwe</small>
+            </div>
+            <div class="action-btns">
+                <button class="btn-approve" onclick="approveAd(2)">Approve</button>
+                <button class="btn-reject" onclick="rejectAd(2)">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="profile.html" style="color: #64748b; text-decoration: none; font-size: 13px;"><i class="fas fa-sign-out-alt"></i> Return to Profile</a>
+    </p>
+
     <script>
+        // YOUR FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
             authDomain: "trust-mart-73f8a.firebaseapp.com",
@@ -39,15 +106,28 @@
         firebase.initializeApp(firebaseConfig);
         const OWNER_EMAIL = "liswanisojim39@gmail.com";
 
+        // ENFORCE OWNER LOGIN
         firebase.auth().onAuthStateChanged((user) => {
             if (user && user.email === OWNER_EMAIL) {
-                document.getElementById('authCheck').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('auth-overlay').style.display = 'none';
             } else {
-                alert("Unauthorized Access Denied.");
+                alert("Unauthorized Access. Returning to Home.");
                 window.location.href = "index.html";
             }
         });
+
+        // MODERATION LOGIC
+        function approveAd(id) {
+            alert("Ad Approved! It is now live on TrustMart.");
+            document.getElementById('ad-' + id).style.border = "1px solid var(--success)";
+            setTimeout(() => { document.getElementById('ad-' + id).remove(); }, 1000);
+        }
+
+        function rejectAd(id) {
+            if(confirm("Permanently delete this listing?")) {
+                document.getElementById('ad-' + id).remove();
+            }
+        }
     </script>
 </body>
 </html>
