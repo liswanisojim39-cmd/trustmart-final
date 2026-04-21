@@ -10,22 +10,39 @@
     <style>
         :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--light); margin: 0; padding-bottom: 90px; }
-        .header { background: var(--primary); padding: 20px; border-radius: 0 0 25px 25px; color: white; position: sticky; top: 0; z-index: 1000; }
-        .logo-text { font-weight: 900; font-size: 20px; }
-        .logo-sub { font-size: 10px; font-weight: 300; opacity: 0.9; }
+        
+        /* Header Branding */
+        .header { background: var(--primary); padding: 20px; border-radius: 0 0 25px 25px; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo-text { font-weight: 900; font-size: 20px; display: flex; align-items: baseline; gap: 6px; }
+        .logo-sub { font-size: 10px; font-weight: 300; opacity: 0.9; text-transform: lowercase; }
+        
         .search-box { background: white; border-radius: 12px; display: flex; align-items: center; padding: 10px 15px; margin-top: 15px; }
-        .search-box input { border: none; outline: none; flex: 1; font-size: 14px; margin-left: 10px; color: #333; }
-        .filters { display: flex; gap: 10px; padding: 15px; overflow-x: auto; white-space: nowrap; }
+        .search-box input { border: none; outline: none; flex: 1; font-size: 14px; margin-left: 10px; color: #333; width: 100%; }
+
+        /* Category Chips */
+        .filters { display: flex; gap: 10px; padding: 15px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .chip { background: white; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--zeta); border: 1px solid #ddd; text-decoration: none; }
+        .chip.active { background: var(--zeta); color: white; border-color: var(--zeta); }
+
+        /* Listing Cards */
         .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
-        .card img { width: 100%; height: 110px; object-fit: cover; background: #eee; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; position: relative; transition: 0.2s; }
+        .card:active { transform: scale(0.98); }
+        .card img { width: 100%; height: 120px; object-fit: cover; background: #e2e8f0; }
+        
         .card-info { padding: 10px; }
-        .card-price { color: var(--primary); font-weight: 800; font-size: 14px; }
+        .card-price { color: var(--primary); font-weight: 800; font-size: 15px; margin-bottom: 2px; }
+        .card-title { font-size: 13px; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-loc { font-size: 11px; color: #64748b; display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+
+        /* Floating Action Button */
         .fab-sell { position: fixed; bottom: 85px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; font-size: 24px; }
+
+        /* Bottom Nav */
         .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
-        .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
+        .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; transition: 0.2s; }
         .f-link.active { color: var(--primary); }
+        .f-link i { font-size: 22px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -34,19 +51,22 @@
         <div class="logo-text">TRUST MART <span class="logo-sub">by Zeta</span></div>
         <div class="search-box">
             <i class="fas fa-search" style="color:#888;"></i>
-            <input type="text" placeholder="Search Lusaka, Kitwe, Ndola...">
+            <input type="text" id="mainSearch" placeholder="Search Lusaka, Kitwe, Ndola..." onkeyup="searchAds()">
         </div>
     </div>
 
     <div class="filters">
-        <a href="index.html" class="chip">All Items</a>
+        <a href="index.html" class="chip active">All Items</a>
         <a href="category.html?type=vehicles" class="chip">Vehicles</a>
         <a href="category.html?type=property" class="chip">Property</a>
         <a href="category.html?type=electronics" class="chip">Electronics</a>
     </div>
 
     <div class="items-grid" id="itemsGrid">
-        <p style="grid-column: span 2; text-align: center; color: #888; padding: 20px;">Loading live listings...</p>
+        <div style="grid-column: span 2; text-align: center; padding: 40px; color: #888;">
+            <i class="fas fa-spinner fa-spin"></i><br>
+            Fetching latest ads...
+        </div>
     </div>
 
     <a href="post-ad.html" class="fab-sell"><i class="fas fa-plus"></i></a>
@@ -58,6 +78,7 @@
     </div>
 
     <script>
+        // YOUR FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
             authDomain: "trust-mart-73f8a.firebaseapp.com",
@@ -66,29 +87,57 @@
             messagingSenderId: "715567477271",
             appId: "1:715567477271:web:0550e70b07f7db8e80a252"
         };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        db.collection("ads").where("status", "==", "approved").orderBy("createdAt", "desc")
-            .onSnapshot((querySnapshot) => {
+        // LOAD APPROVED ADS
+        function loadAds() {
+            db.collection("ads")
+              .where("status", "==", "approved")
+              .orderBy("createdAt", "desc")
+              .onSnapshot((snapshot) => {
                 const grid = document.getElementById('itemsGrid');
                 grid.innerHTML = "";
-                if(querySnapshot.empty) {
-                    grid.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #888; padding: 20px;">No ads live yet. Be the first to post!</p>';
+
+                if (snapshot.empty) {
+                    grid.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #888;">No ads live yet. Be the first!</p>';
+                    return;
                 }
-                querySnapshot.forEach((doc) => {
+
+                snapshot.forEach((doc) => {
                     const ad = doc.data();
+                    // Using the Image Link provided by user, or a placeholder if empty
+                    const displayImg = ad.imageUrl || 'https://via.placeholder.com/400x250?text=Trust+Mart';
+                    
                     grid.innerHTML += `
                         <div class="card">
-                            <img src="https://via.placeholder.com/400x250?text=${ad.category}">
+                            <img src="${displayImg}" onerror="this.src='https://via.placeholder.com/400x250?text=Image+Error'">
                             <div class="card-info">
-                                <div class="card-price">K ${ad.price}</div>
-                                <span style="font-size: 13px; font-weight: bold;">${ad.title}</span><br>
-                                <small style="color: #888;">${ad.location}</small>
+                                <div class="card-price">K ${Number(ad.price).toLocaleString()}</div>
+                                <span class="card-title">${ad.title}</span>
+                                <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${ad.location}</div>
                             </div>
-                        </div>`;
+                        </div>
+                    `;
                 });
             });
+        }
+
+        // SIMPLE SEARCH
+        function searchAds() {
+            let input = document.getElementById('mainSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            for (let i = 0; i < cards.length; i++) {
+                if (!cards[i].innerText.toLowerCase().includes(input)) {
+                    cards[i].style.display = "none";
+                } else {
+                    cards[i].style.display = "block";
+                }
+            }
+        }
+
+        window.onload = loadAds;
     </script>
 </body>
 </html>
