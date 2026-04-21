@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
-        body { font-family: sans-serif; background-color: var(--light); margin: 0; padding-bottom: 80px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 90px; }
         
         .header { background: var(--primary); color: white; padding: 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 24px; }
+        .header h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
 
-        /* Search Section */
         .search-area { padding: 15px; }
         .search-box {
             background: white;
@@ -22,23 +21,43 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .search-box input {
-            border: none;
-            outline: none;
-            width: 100%;
-            margin-left: 10px;
-            font-size: 16px;
-        }
+        .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-size: 16px; }
 
-        .section-title { padding: 10px 20px; font-size: 18px; font-weight: bold; }
+        .section-header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .section-header h2 { font-size: 18px; margin: 0; color: var(--dark); }
+        .section-header a { font-size: 12px; color: var(--primary); text-decoration: none; font-weight: bold; }
 
         .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
-        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s; }
+        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .cat-item i { font-size: 20px; color: var(--primary); margin-bottom: 8px; display: block; }
         .cat-item span { font-size: 11px; font-weight: 600; }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #ddd; }
+        /* Featured Section Styling */
+        .featured-container { padding: 0 15px; margin-top: 10px; }
+        .featured-card { 
+            background: white; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            margin-bottom: 15px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card-img { 
+            width: 100%; 
+            height: 160px; 
+            background-size: cover; 
+            background-position: center; 
+        }
+        .card-info { padding: 12px; }
+        .card-price { color: var(--primary); font-weight: bold; font-size: 18px; margin: 0; }
+        .card-title { font-size: 14px; color: var(--dark); margin: 5px 0; font-weight: 600; }
+        .card-loc { font-size: 12px; color: #888; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
         .nav-link { text-decoration: none; color: #888; font-size: 11px; text-align: center; }
+        .nav-link.active { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -50,11 +69,13 @@
     <div class="search-area">
         <div class="search-box">
             <i class="fas fa-search" style="color: #999;"></i>
-            <input type="text" id="searchInput" onkeyup="filterCategories()" placeholder="Search categories...">
+            <input type="text" id="searchInput" onkeyup="filterCategories()" placeholder="What are you looking for?">
         </div>
     </div>
 
-    <h2 class="section-title">Categories</h2>
+    <div class="section-header">
+        <h2>Categories</h2>
+    </div>
     <div class="cat-grid" id="categoryGrid">
         <a href="property.html" class="cat-item">
             <i class="fas fa-home"></i>
@@ -70,8 +91,33 @@
         </a>
     </div>
 
+    <div class="section-header" style="margin-top: 20px;">
+        <h2>Featured for You</h2>
+        <a href="#">See All</a>
+    </div>
+
+    <div class="featured-container">
+        <a href="property.html" class="featured-card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600');"></div>
+            <div class="card-info">
+                <p class="card-price">K 1,200,000</p>
+                <p class="card-title">Modern 3BR Villa with Pool</p>
+                <p class="card-loc"><i class="fas fa-map-marker-alt"></i> Avondale, Lusaka</p>
+            </div>
+        </a>
+
+        <a href="vehicles.html" class="featured-card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600');"></div>
+            <div class="card-info">
+                <p class="card-price">K 145,000</p>
+                <p class="card-title">Toyota Corolla 2016 - Clean</p>
+                <p class="card-loc"><i class="fas fa-map-marker-alt"></i> Kitwe, Copperbelt</p>
+            </div>
+        </a>
+    </div>
+
     <div class="bottom-nav">
-        <a href="index.html" class="nav-link" style="color: var(--primary);"><i class="fas fa-home"></i><br>Home</a>
+        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i><br>Home</a>
         <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-plus-circle"></i><br>Sell</a>
         <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-headset"></i><br>Help</a>
     </div>
@@ -81,14 +127,9 @@
             let input = document.getElementById('searchInput').value.toLowerCase();
             let grid = document.getElementById('categoryGrid');
             let items = grid.getElementsByClassName('cat-item');
-
             for (let i = 0; i < items.length; i++) {
                 let title = items[i].getElementsByTagName('span')[0].innerText.toLowerCase();
-                if (title.includes(input)) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
+                items[i].style.display = title.includes(input) ? "" : "none";
             }
         }
     </script>
