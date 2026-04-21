@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 20px; }
+        .header { background: var(--primary); color: white; padding: 20px; display: flex; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
+        .container { padding: 15px; }
+        
+        .v-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; display: block; }
+        .v-img { height: 180px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600') center/cover; position: relative; }
+        .v-price { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        .v-info { padding: 15px; }
+        .v-title { font-size: 16px; font-weight: bold; margin: 0; }
+        .view-btn { background: var(--zeta); color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; display: block; margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" style="color:white; text-decoration:none;"><i class="fas fa-arrow-left"></i></a>
+        <h1 style="margin:0; font-size: 20px; margin-left: 10px;">Vehicles</h1>
+    </div>
+    <div class="container">
+        <a href="vehicle-details.html" class="v-card">
+            <div class="v-img"><div class="v-price">K 145,000</div></div>
+            <div class="v-info">
+                <p class="v-title">Toyota Corolla 2016</p>
+                <p style="font-size:12px; color:#888;"><i class="fas fa-map-marker-alt"></i> Kitwe, Zambia</p>
+                <div class="view-btn">View Details</div>
+            </div>
+        </a>
+
+        <a href="vehicle-details.html" class="v-card">
+            <div class="v-img" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600');">
+                <div class="v-price">K 85,000</div>
+            </div>
+            <div class="v-info">
+                <p class="v-title">Toyota Vitz 2012</p>
+                <p style="font-size:12px; color:#888;"><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</p>
+                <div class="view-btn">View Details</div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
