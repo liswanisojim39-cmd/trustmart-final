@@ -5,37 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Ad - Trust Mart</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --zeta: #2c3e50; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
-        .form-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .helper-text { font-size: 11px; color: #666; margin-bottom: 10px; display: block; }
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 450px; margin: auto; }
+        input, button { width: 100%; padding: 14px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+        button { background: #27ae60; color: white; font-weight: bold; border: none; cursor: pointer; }
+        button:disabled { background: #ccc; }
     </style>
 </head>
 <body>
-    <div class="form-card">
-        <h2>Post New Ad</h2>
-        <form id="adForm">
-            <input type="text" id="title" placeholder="Item Name" required>
-            <select id="category" required>
-                <option value="vehicles">Vehicles</option>
-                <option value="electronics">Electronics</option>
-                <option value="property">Property</option>
-            </select>
+    <div class="card">
+        <h2 style="margin-top:0;">Sell on Trust Mart</h2>
+        <form id="postForm">
+            <input type="text" id="title" placeholder="Item Name (e.g. iPhone 13)" required>
             <input type="number" id="price" placeholder="Price (ZMW)" required>
-            <input type="text" id="location" placeholder="Location" required>
-            
-            <label>Image Link:</label>
-            <input type="url" id="imageUrl" placeholder="Paste image link here..." required>
-            <span class="helper-text">Tip: Upload your photo to <b>PostImages.org</b> and paste the "Direct Link" here.</span>
-            
-            <textarea id="desc" rows="3" placeholder="Description"></textarea>
-            <button type="submit" class="submit-btn">Post My Ad</button>
+            <input type="text" id="loc" placeholder="Location (e.g. Kitwe)" required>
+            <label style="font-size:12px; color:#666;">Choose Image from Gallery:</label>
+            <input type="file" id="imageInput" accept="image/*" required>
+            <button type="submit" id="submitBtn">Post My Ad</button>
         </form>
     </div>
 
@@ -50,28 +38,46 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        const auth = firebase.auth();
 
-        document.getElementById('adForm').addEventListener('submit', async (e) => {
+        document.getElementById('postForm').onsubmit = async (e) => {
             e.preventDefault();
-            const user = auth.currentUser;
-            if(!user) { alert("Login first!"); return; }
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Uploading to Zeta Cloud...";
+            btn.disabled = true;
 
-            const adData = {
-                title: document.getElementById('title').value,
-                category: document.getElementById('category').value,
-                price: document.getElementById('price').value,
-                location: document.getElementById('location').value,
-                imageUrl: document.getElementById('imageUrl').value,
-                sellerEmail: user.email,
-                status: "pending",
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
+            // --- CLOUDINARY CONFIG ---
+            const cloudName = "dnofebxzm"; 
+            const presetName = "zeta_preset"; // <--- MAKE SURE THIS IS "UNSIGNED" IN CLOUDINARY SETTINGS
 
-            await db.collection("ads").add(adData);
-            alert("Sent for approval!");
-            window.location.href = "index.html";
-        });
+            const file = document.getElementById('imageInput').files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', presetName);
+
+            try {
+                const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+
+                await db.collection("ads").add({
+                    title: document.getElementById('title').value,
+                    price: document.getElementById('price').value,
+                    location: document.getElementById('loc').value,
+                    imageUrl: data.secure_url,
+                    status: "pending",
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert("Ad sent! Check Admin page to approve it.");
+                window.location.href = "index.html";
+            } catch (err) {
+                alert("Upload failed. Check your Cloudinary Preset name.");
+                btn.disabled = false;
+                btn.innerText = "Post My Ad";
+            }
+        };
     </script>
 </body>
 </html>
