@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; }
+        
+        .header { background: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+        .back-btn { color: var(--zeta); text-decoration: none; font-size: 18px; }
+        
+        .container { padding: 25px 20px; }
+        
+        /* Avatar Edit */
+        .edit-pic-section { text-align: center; margin-bottom: 30px; }
+        .avatar-preview { width: 100px; height: 100px; border-radius: 50%; background: var(--zeta); color: white; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 10px; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; }
+        .cam-badge { position: absolute; bottom: 0; right: 0; background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid white; }
+
+        /* Inputs */
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 12px; font-weight: 800; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        input, select, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ddd; font-size: 15px; box-sizing: border-box; background: white; }
+        input:focus { border-color: var(--primary); outline: none; }
+
+        .save-btn { background: var(--primary); color: white; border: none; width: 100%; padding: 18px; border-radius: 15px; font-weight: bold; font-size: 16px; margin-top: 10px; cursor: pointer; box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="profile.html" class="back-btn"><i class="fas fa-times"></i></a>
+        <h2 style="margin:0; font-size: 16px;">Edit Profile</h2>
+        <span style="color: var(--primary); font-weight: bold; font-size: 14px;" onclick="location.href='success.html'">Done</span>
+    </div>
+
+    <div class="container">
+        <div class="edit-pic-section">
+            <div class="avatar-preview">
+                <i class="fas fa-user"></i>
+                <div class="cam-badge"><i class="fas fa-camera"></i></div>
+            </div>
+            <span style="color: var(--primary); font-size: 13px; font-weight: bold;">Update Profile Picture</span>
+        </div>
+
+        <div class="input-group">
+            <label>Public Name</label>
+            <input type="text" value="Zambian Trader">
+        </div>
+
+        <div class="input-group">
+            <label>Location</label>
+            <select>
+                <option>Chipata</option>
+                <option>Lusaka</option>
+                <option>Kitwe</option>
+                <option>Ndola</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Bio</label>
+            <textarea rows="3">Official Zeta-partnered seller. High-quality electronics and verified properties in Chipata and Lusaka.</textarea>
+        </div>
+
+        <div class="input-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" value="+260 970000000">
+        </div>
+
+        <button class="save-btn" onclick="location.href='success.html'">Save Changes</button>
+    </div>
+
+</body>
+</html>
