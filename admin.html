@@ -3,127 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeta Admin - Dashboard</title>
+    <title>Zeta Admin - Owner Only</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --admin-bg: #0f172a; --card-bg: #1e293b; --primary: #38bdf8; --success: #22c55e; --gold: #fbbf24; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--admin-bg); color: #f1f5f9; margin: 0; padding-bottom: 40px; }
-        
-        .header { padding: 25px; background: var(--card-bg); border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-        .header h1 { font-size: 20px; margin: 0; letter-spacing: 1px; color: var(--primary); }
-
-        .container { padding: 20px; }
-
-        /* KPI Grid */
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid #334155; }
-        .stat-card i { font-size: 20px; margin-bottom: 10px; display: block; }
-        .stat-val { font-size: 22px; font-weight: 800; display: block; }
-        .stat-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600; margin-top: 5px; }
-
-        /* Revenue Section */
-        .revenue-card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 25px; border-radius: 25px; border: 2px solid var(--gold); margin-bottom: 25px; position: relative; overflow: hidden; }
-        .revenue-card::after { content: '\f15a'; font-family: 'Font Awesome 5 Free'; font-weight: 900; position: absolute; right: -10px; bottom: -10px; font-size: 80px; opacity: 0.1; color: var(--gold); }
-
-        /* Category Table */
-        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 15px; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
-        .data-list { background: var(--card-bg); border-radius: 20px; overflow: hidden; }
-        .data-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #334155; }
-        .cat-info { display: flex; align-items: center; gap: 12px; }
-        .cat-icon { width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-
-        /* Progress Bars */
-        .progress-bg { width: 100px; height: 6px; background: #334155; border-radius: 10px; overflow: hidden; margin-top: 5px; }
-        .progress-fill { height: 100%; background: var(--primary); }
-
-        .back-to-app { text-align: center; margin-top: 30px; }
-        .back-to-app a { color: #94a3b8; text-decoration: none; font-size: 13px; }
+        body { font-family: sans-serif; background: #0f172a; color: white; margin: 0; padding: 20px; text-align: center; }
+        .dashboard { max-width: 500px; margin: auto; background: #1e293b; padding: 30px; border-radius: 20px; margin-top: 50px; }
+        .stat-card { background: #334155; padding: 20px; border-radius: 15px; margin-bottom: 15px; }
+        .back-btn { color: #38bdf8; text-decoration: none; display: block; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>ZETA ADMIN</h1>
-        <div style="position: relative;">
-            <i class="fas fa-circle" style="color: var(--success); font-size: 8px; position: absolute; top: 0; right: 0;"></i>
-            <i class="fas fa-user-shield"></i>
-        </div>
-    </div>
-
-    <div class="container">
+    <script>
+        // Re-paste your firebaseConfig here
+        const firebaseConfig = { /* SAME AS PROFILE.HTML */ };
+        firebase.initializeApp(firebaseConfig);
         
-        <div class="revenue-card">
-            <span class="stat-label" style="color: var(--gold);">Total Revenue (ZMW)</span>
-            <span class="stat-val" style="font-size: 32px; color: #fff;">K 12,450.00</span>
-            <p style="font-size: 12px; color: var(--success); margin-top: 10px;">
-                <i class="fas fa-arrow-up"></i> +15% from last week
-            </p>
-        </div>
+        firebase.auth().onAuthStateChanged((user) => {
+            const OWNER_EMAIL = "your-email@gmail.com";
+            if (!user || user.email !== OWNER_EMAIL) {
+                alert("Unauthorized Access!");
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <i class="fas fa-users" style="color: var(--primary);"></i>
-                <span class="stat-val">1,204</span>
-                <span class="stat-label">Total Users</span>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-shopping-bag" style="color: #a855f7;"></i>
-                <span class="stat-val">452</span>
-                <span class="stat-label">Active Ads</span>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-crown" style="color: var(--gold);"></i>
-                <span class="stat-val">84</span>
-                <span class="stat-label">Pro Sellers</span>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                <span class="stat-val">312</span>
-                <span class="stat-label">Verified</span>
-            </div>
-        </div>
-
-        <div class="section-title"><i class="fas fa-chart-pie"></i> Category Performance</div>
+    <div class="dashboard">
+        <i class="fas fa-user-shield" style="font-size: 50px; color: #38bdf8; margin-bottom: 20px;"></i>
+        <h1>Zeta Control Room</h1>
         
-        <div class="data-list">
-            <div class="data-item">
-                <div class="cat-info">
-                    <div class="cat-icon" style="background: rgba(56, 189, 248, 0.1); color: var(--primary);"><i class="fas fa-car"></i></div>
-                    <div>
-                        <span style="font-size: 14px; font-weight: 600;">Vehicles</span>
-                        <div class="progress-bg"><div class="progress-fill" style="width: 75%;"></div></div>
-                    </div>
-                </div>
-                <b style="font-size: 14px;">184</b>
-            </div>
-
-            <div class="data-item">
-                <div class="cat-info">
-                    <div class="cat-icon" style="background: rgba(34, 197, 94, 0.1); color: var(--success);"><i class="fas fa-home"></i></div>
-                    <div>
-                        <span style="font-size: 14px; font-weight: 600;">Property</span>
-                        <div class="progress-bg"><div class="progress-fill" style="width: 45%; background: var(--success);"></div></div>
-                    </div>
-                </div>
-                <b style="font-size: 14px;">112</b>
-            </div>
-
-            <div class="data-item">
-                <div class="cat-info">
-                    <div class="cat-icon" style="background: rgba(251, 191, 36, 0.1); color: var(--gold);"><i class="fas fa-mobile-alt"></i></div>
-                    <div>
-                        <span style="font-size: 14px; font-weight: 600;">Electronics</span>
-                        <div class="progress-bg"><div class="progress-fill" style="width: 60%; background: var(--gold);"></div></div>
-                    </div>
-                </div>
-                <b style="font-size: 14px;">156</b>
-            </div>
+        <div class="stat-card">
+            <small>REVENUE</small>
+            <h2 style="color: #22c55e;">K 12,450.00</h2>
         </div>
 
-        <div class="back-to-app">
-            <a href="profile.html"><i class="fas fa-long-arrow-alt-left"></i> Back to User Interface</a>
+        <div class="stat-card">
+            <small>TOTAL USERS</small>
+            <h2>1,204</h2>
         </div>
 
+        <a href="profile.html" class="back-btn">Exit Admin Panel</a>
     </div>
 
 </body>
