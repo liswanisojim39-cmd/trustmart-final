@@ -2,52 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Trust Mart by Zeta</title>
+    <title>Admin Panel - Zeta</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: white; padding: 20px; }
-        .ad-card { background: #1e293b; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid orange; }
-        button { padding: 8px 15px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; margin-right: 10px; }
-        .app-btn { background: #22c55e; color: white; }
-        .del-btn { background: #ef4444; color: white; }
+        body { background: #111827; color: white; font-family: sans-serif; padding: 20px; }
+        .ad-row { background: #1f2937; padding: 15px; margin-bottom: 10px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; }
+        button { background: #10b981; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h2>Moderation Queue</h2>
-    <div id="list">Loading...</div>
+    <h2>Review Pending Ads</h2>
+    <div id="adminList"></div>
 
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
-            authDomain: "trust-mart-73f8a.firebaseapp.com",
-            projectId: "trust-mart-73f8a",
-            storageBucket: "trust-mart-73f8a.firebasestorage.app",
-            messagingSenderId: "715567477271",
-            appId: "1:715567477271:web:0550e70b07f7db8e80a252"
-        };
+        const firebaseConfig = { apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA", authDomain: "trust-mart-73f8a.firebaseapp.com", projectId: "trust-mart-73f8a", storageBucket: "trust-mart-73f8a.firebasestorage.app", messagingSenderId: "715567477271", appId: "1:715567477271:web:0550e70b07f7db8e80a252" };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
         db.collection("ads").where("status", "==", "pending").onSnapshot(snap => {
-            const list = document.getElementById('list');
+            const list = document.getElementById('adminList');
             list.innerHTML = "";
             snap.forEach(doc => {
                 const ad = doc.data();
-                list.innerHTML += `
-                    <div class="ad-card">
-                        <strong>${ad.title} (K${ad.price})</strong><br>
-                        <small>${ad.sellerEmail}</small><br><br>
-                        <button class="app-btn" onclick="approve('${doc.id}')">Approve</button>
-                        <button class="del-btn" onclick="deleteAd('${doc.id}')">Delete</button>
-                    </div>`;
+                list.innerHTML += `<div class="ad-row">
+                    <div>
+                        <img src="${ad.imageUrl}" width="60" style="border-radius:5px; margin-right:15px;">
+                        <strong>${ad.title}</strong> - K${ad.price}
+                    </div>
+                    <button onclick="approve('${doc.id}')">APPROVE</button>
+                </div>`;
             });
         });
 
-        async function approve(id) { await db.collection("ads").doc(id).update({status: "approved"}); }
-        async function deleteAd(id) { if(confirm("Delete?")) await db.collection("ads").doc(id).delete(); }
+        async function approve(id) {
+            await db.collection("ads").doc(id).update({ status: "approved" });
+            alert("Success: Ad is now live!");
+        }
     </script>
 </body>
 </html>
