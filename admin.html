@@ -3,49 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeta Admin - Owner Only</title>
+    <title>Admin Dashboard - Restricted</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: white; margin: 0; padding: 20px; text-align: center; }
-        .dashboard { max-width: 500px; margin: auto; background: #1e293b; padding: 30px; border-radius: 20px; margin-top: 50px; }
-        .stat-card { background: #334155; padding: 20px; border-radius: 15px; margin-bottom: 15px; }
-        .back-btn { color: #38bdf8; text-decoration: none; display: block; margin-top: 20px; }
+        body { font-family: sans-serif; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .gate-msg { text-align: center; padding: 20px; }
+        #adminContent { display: none; width: 100%; max-width: 600px; padding: 20px; }
     </style>
 </head>
 <body>
 
+    <div id="gatekeeper" class="gate-msg">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Verifying Identity...</p>
+    </div>
+
+    <div id="adminContent">
+        <h1>Welcome Back, Owner</h1>
+        <p>Your Admin Panel is ready.</p>
+        <a href="profile.html" style="color: #38bdf8; text-decoration: none;">Exit Dashboard</a>
+    </div>
+
     <script>
-        // Re-paste your firebaseConfig here
-        const firebaseConfig = { /* SAME AS PROFILE.HTML */ };
+        // USE THE SAME CONFIG AS PROFILE.HTML
+        const firebaseConfig = { /* PASTE YOUR CONFIG HERE */ };
         firebase.initializeApp(firebaseConfig);
-        
+
+        const OWNER_EMAIL = "liswanisojim39@gmail.com";
+
         firebase.auth().onAuthStateChanged((user) => {
-            const OWNER_EMAIL = "your-email@gmail.com";
-            if (!user || user.email !== OWNER_EMAIL) {
-                alert("Unauthorized Access!");
+            if (user && user.email === OWNER_EMAIL) {
+                document.getElementById('gatekeeper').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+            } else {
+                alert("Unauthorized! Returning to home.");
                 window.location.href = "index.html";
             }
         });
     </script>
-
-    <div class="dashboard">
-        <i class="fas fa-user-shield" style="font-size: 50px; color: #38bdf8; margin-bottom: 20px;"></i>
-        <h1>Zeta Control Room</h1>
-        
-        <div class="stat-card">
-            <small>REVENUE</small>
-            <h2 style="color: #22c55e;">K 12,450.00</h2>
-        </div>
-
-        <div class="stat-card">
-            <small>TOTAL USERS</small>
-            <h2>1,204</h2>
-        </div>
-
-        <a href="profile.html" class="back-btn">Exit Admin Panel</a>
-    </div>
-
 </body>
 </html>
