@@ -3,35 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Mart Admin - Moderator View</title>
+    <title>Admin - Trust Mart by Zeta</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --dark-bg: #0f172a; --card-bg: #1e293b; --accent: #38bdf8; --success: #22c55e; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: white; padding: 20px; margin: 0; }
-        .header { margin-bottom: 25px; border-bottom: 1px solid #334155; padding-bottom: 15px; }
-        .ad-card { background: var(--card-bg); padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 5px solid #f59e0b; }
-        .ad-card.approved { border-left-color: var(--success); opacity: 0.5; }
-        .btn-group { display: flex; gap: 10px; margin-top: 10px; }
-        button { flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; }
-        .approve-btn { background: var(--success); color: white; }
-        .delete-btn { background: #ef4444; color: white; }
-        #auth-gate { position: fixed; inset: 0; background: var(--dark-bg); display: flex; align-items: center; justify-content: center; z-index: 100; }
+        body { font-family: sans-serif; background: #0f172a; color: white; padding: 20px; }
+        .ad-card { background: #1e293b; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid orange; }
+        button { padding: 8px 15px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; margin-right: 10px; }
+        .app-btn { background: #22c55e; color: white; }
+        .del-btn { background: #ef4444; color: white; }
     </style>
 </head>
 <body>
-
-    <div id="auth-gate"><p><i class="fas fa-lock"></i> Verifying Liswaniso...</p></div>
-
-    <div class="header">
-        <h1 style="font-size: 20px; margin: 0;">Moderation Queue</h1>
-        <small id="countText">Loading pending ads...</small>
-    </div>
-
-    <div id="pendingList">
-        </div>
+    <h2>Moderation Queue</h2>
+    <div id="list">Loading...</div>
 
     <script>
         const firebaseConfig = {
@@ -42,57 +28,26 @@
             messagingSenderId: "715567477271",
             appId: "1:715567477271:web:0550e70b07f7db8e80a252"
         };
-
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        const OWNER_EMAIL = "liswanisojim39@gmail.com";
 
-        // 1. SECURITY CHECK
-        firebase.auth().onAuthStateChanged(user => {
-            if (user && user.email === OWNER_EMAIL) {
-                document.getElementById('auth-gate').remove();
-                listenForAds();
-            } else {
-                window.location.href = "index.html";
-            }
+        db.collection("ads").where("status", "==", "pending").onSnapshot(snap => {
+            const list = document.getElementById('list');
+            list.innerHTML = "";
+            snap.forEach(doc => {
+                const ad = doc.data();
+                list.innerHTML += `
+                    <div class="ad-card">
+                        <strong>${ad.title} (K${ad.price})</strong><br>
+                        <small>${ad.sellerEmail}</small><br><br>
+                        <button class="app-btn" onclick="approve('${doc.id}')">Approve</button>
+                        <button class="del-btn" onclick="deleteAd('${doc.id}')">Delete</button>
+                    </div>`;
+            });
         });
 
-        // 2. LISTEN FOR NEW ADS
-        function listenForAds() {
-            db.collection("ads").where("status", "==", "pending")
-              .onSnapshot(snapshot => {
-                const list = document.getElementById('pendingList');
-                document.getElementById('countText').innerText = snapshot.size + " ads waiting for review";
-                list.innerHTML = "";
-
-                snapshot.forEach(doc => {
-                    const ad = doc.data();
-                    const id = doc.id;
-                    list.innerHTML += `
-                        <div class="ad-card" id="card-${id}">
-                            <div style="font-size: 14px; font-weight: bold;">${ad.title} - K${ad.price}</div>
-                            <div style="font-size: 12px; color: #94a3b8;">User: ${ad.sellerEmail} | Loc: ${ad.location}</div>
-                            <div class="btn-group">
-                                <button class="approve-btn" onclick="approveAd('${id}')">Approve</button>
-                                <button class="delete-btn" onclick="deleteAd('${id}')">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                });
-            });
-        }
-
-        // 3. ADMIN ACTIONS
-        async function approveAd(id) {
-            await db.collection("ads").doc(id).update({ status: "approved" });
-            alert("Ad is now LIVE on Trust Mart!");
-        }
-
-        async function deleteAd(id) {
-            if(confirm("Permanently delete this ad?")) {
-                await db.collection("ads").doc(id).delete();
-            }
-        }
+        async function approve(id) { await db.collection("ads").doc(id).update({status: "approved"}); }
+        async function deleteAd(id) { if(confirm("Delete?")) await db.collection("ads").doc(id).delete(); }
     </script>
 </body>
 </html>
