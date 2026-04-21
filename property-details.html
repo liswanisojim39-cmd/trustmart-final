@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f4f7f6; padding-bottom: 80px; }
+        
+        /* Image Gallery */
+        .image-header { width: 100%; height: 300px; background: #ddd url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800') center/cover; position: relative; }
+        .back-circle { position: absolute; top: 20px; left: 20px; background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #333; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .tag-overlay { position: absolute; bottom: 20px; left: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; }
+
+        .content { padding: 20px; background: white; border-radius: 25px 25px 0 0; margin-top: -25px; position: relative; }
+        .price { font-size: 28px; font-weight: 800; color: var(--primary); margin: 0; }
+        .title { font-size: 20px; font-weight: 700; margin: 10px 0; color: var(--zeta); }
+        .location { color: #7f8c8d; font-size: 14px; display: flex; align-items: center; gap: 5px; }
+
+        .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0; }
+        .spec-item { text-align: center; }
+        .spec-item i { display: block; color: var(--primary); font-size: 20px; margin-bottom: 5px; }
+        .spec-item span { font-size: 12px; font-weight: 600; color: #555; }
+
+        .description { line-height: 1.6; color: #555; font-size: 15px; }
+        .description h3 { color: var(--zeta); font-size: 18px; }
+
+        /* Action Bar */
+        .action-bar { position: fixed; bottom: 0; width: 100%; background: white; padding: 15px 20px; display: flex; gap: 15px; box-sizing: border-box; border-top: 1px solid #eee; }
+        .call-btn { flex: 1; border: 2px solid var(--primary); color: var(--primary); text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; }
+        .wa-btn { flex: 2; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="image-header">
+        <a href="property.html" class="back-circle"><i class="fas fa-arrow-left"></i></a>
+        <div class="tag-overlay">FOR RENT</div>
+    </div>
+
+    <div class="content">
+        <p class="price">K 12,500 /mo</p>
+        <h1 class="title">Modern 3BR Apartment - Meanwood</h1>
+        <div class="location">
+            <i class="fas fa-map-marker-alt"></i> Meanwood Ibex, Lusaka, Zambia
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-item"><i class="fas fa-bed"></i><span>3 Bedrooms</span></div>
+            <div class="spec-item"><i class="fas fa-bath"></i><span>2 Bathrooms</span></div>
+            <div class="spec-item"><i class="fas fa-shield-alt"></i><span>Secure Fence</span></div>
+        </div>
+
+        <div class="description">
+            <h3>Property Description</h3>
+            <p>This beautiful modern apartment is located in a secure gated community in Meanwood Ibex. It features a spacious kitchen, master self-contained, and consistent water supply. Perfect for a family looking for peace and security.</p>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <a href="tel:+260979710270" class="call-btn"><i class="fas fa-phone-alt"></i> Call</a>
+        <a href="https://wa.me/260979710270?text=I'm interested in the Meanwood Apartment" class="wa-btn">
+            <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>
