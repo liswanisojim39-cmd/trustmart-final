@@ -3,108 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sell on TrustMart Zeta</title>
+    <title>Post Ad - Trust Mart by Zeta</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --zeta: #2c3e50; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 40px; }
-        
-        /* Header */
-        .header { background: white; padding: 15px 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
-        .header h1 { font-size: 18px; margin: 0; color: var(--zeta); }
-        .back-btn { color: var(--zeta); text-decoration: none; font-size: 20px; }
-
-        .container { padding: 20px; max-width: 500px; margin: auto; }
-
-        /* Form Styling */
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 13px; font-weight: 700; color: var(--zeta); margin-bottom: 8px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: var(--primary); }
-
-        /* Photo Upload Placeholder */
-        .photo-upload { width: 100%; height: 150px; border: 2px dashed #ccc; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: white; color: #888; cursor: pointer; margin-bottom: 20px; }
-        .photo-upload i { font-size: 30px; margin-bottom: 10px; color: var(--primary); }
-
-        /* Safety Box */
-        .safety-box { background: #fff8e1; border: 1px solid #ffe082; padding: 15px; border-radius: 10px; margin-bottom: 25px; display: flex; gap: 12px; }
-        .safety-box i { color: #f57c00; font-size: 20px; }
-        .safety-box p { margin: 0; font-size: 12px; color: #5d4037; line-height: 1.4; }
-
-        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .submit-btn:active { transform: scale(0.98); background: #219150; }
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .form-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 10px; }
     </style>
 </head>
 <body>
-
     <div class="header">
-        <a href="index.html" class="back-btn"><i class="fas fa-times"></i></a>
-        <h1>Create New Listing</h1>
+        <a href="index.html" style="color:var(--zeta)"><i class="fas fa-arrow-left"></i></a>
+        <h1 style="font-size: 18px; margin:0;">Post New Ad</h1>
     </div>
 
-    <div class="container">
-        
-        <div class="safety-box">
-            <i class="fas fa-shield-alt"></i>
-            <p><b>TrustMart Safety:</b> Do not post fake items. All ads in Zambia are reviewed by our team before going live. Fraudulent accounts will be banned.</p>
-        </div>
-
-        <form id="adForm" onsubmit="handleSubmit(event)">
-            
-            <label>Add Photos (Up to 5)</label>
-            <div class="photo-upload" onclick="alert('In the live app, this opens your camera gallery.')">
-                <i class="fas fa-camera"></i>
-                <span>Tap to add photos</span>
-            </div>
-
-            <div class="form-group">
-                <label>What are you selling?</label>
-                <input type="text" id="title" placeholder="e.g. Toyota Belta 2012" required>
-            </div>
-
-            <div class="form-group">
-                <label>Category</label>
-                <select id="category" required>
-                    <option value="">Select Category</option>
-                    <option value="vehicles">Vehicles</option>
-                    <option value="property">Property / Rent</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="home">Home & Garden</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Price (ZMW)</label>
-                <input type="number" id="price" placeholder="Enter amount" required>
-            </div>
-
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" id="location" placeholder="e.g. Lusaka, Meanwood" required>
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="desc" rows="4" placeholder="Tell buyers about the condition, features, etc."></textarea>
-            </div>
-
+    <div class="form-card">
+        <form id="adForm">
+            <input type="text" id="title" placeholder="Item Name (e.g. Toyota Vitz)" required>
+            <select id="category" required>
+                <option value="">Select Category</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="electronics">Electronics</option>
+                <option value="property">Property</option>
+            </select>
+            <input type="number" id="price" placeholder="Price (ZMW)" required>
+            <input type="text" id="location" placeholder="Location (e.g. Lusaka)" required>
+            <textarea id="desc" rows="4" placeholder="Description"></textarea>
             <button type="submit" class="submit-btn">Post My Ad</button>
         </form>
     </div>
 
     <script>
-        function handleSubmit(e) {
-            e.preventDefault();
-            
-            const title = document.getElementById('title').value;
-            
-            // For now, we simulate a successful post
-            alert("Success! Your ad for '" + title + "' has been submitted and is pending review by Liswaniso.");
-            
-            // Redirect back home
-            window.location.href = "index.html";
-        }
-    </script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
+            authDomain: "trust-mart-73f8a.firebaseapp.com",
+            projectId: "trust-mart-73f8a",
+            storageBucket: "trust-mart-73f8a.firebasestorage.app",
+            messagingSenderId: "715567477271",
+            appId: "1:715567477271:web:0550e70b07f7db8e80a252"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
 
+        document.getElementById('adForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if(!user) { alert("Please login in Profile first!"); return; }
+
+            const adData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                price: document.getElementById('price').value,
+                location: document.getElementById('location').value,
+                description: document.getElementById('desc').value,
+                sellerEmail: user.email,
+                status: "pending",
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            await db.collection("ads").add(adData);
+            alert("Success! Ad sent for approval.");
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>
