@@ -3,42 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustMart Zambia</title>
+    <title>TrustMart - Zambia's Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; color: #2c3e50; padding-bottom: 90px; }
+        :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; --gold: #fbbf24; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 90px; }
         
-        /* Header & Search Area */
-        .top-section { background: var(--primary); padding: 20px 15px 30px; border-radius: 0 0 25px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .logo-text { color: white; font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 15px; }
+        /* Header & Search */
+        .header { background: var(--primary); padding: 20px; border-radius: 0 0 25px 25px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: white; }
+        .logo-row a { color: white; text-decoration: none; position: relative; }
+        .notif-dot { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #e74c3c; border: 2px solid var(--primary); border-radius: 50%; }
         
-        .search-box { background: white; display: flex; align-items: center; padding: 12px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .search-box i { color: #888; margin-right: 10px; }
-        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; }
+        .search-box { background: white; border-radius: 12px; display: flex; align-items: center; padding: 10px 15px; }
+        .search-box input { border: none; outline: none; flex: 1; font-size: 14px; margin-left: 10px; width: 100%; }
 
-        .container { padding: 15px; }
-        .section-label { font-size: 12px; font-weight: 800; color: #95a5a6; margin: 20px 0 10px 5px; text-transform: uppercase; letter-spacing: 1px; }
+        /* Filter Chips */
+        .filters { display: flex; gap: 10px; padding: 15px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .chip { background: white; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--zeta); border: 1px solid #ddd; text-decoration: none; display: inline-block; }
+        .chip.active { background: var(--zeta); color: white; border-color: var(--zeta); }
 
-        /* Categories */
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .box { background: white; padding: 18px 5px; border-radius: 15px; text-align: center; text-decoration: none; color: #2c3e50; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border: 1px solid #eee; }
-        .box i { color: var(--primary); font-size: 24px; display: block; margin-bottom: 8px; }
-        .box span { font-size: 11px; font-weight: 700; }
+        .container { padding: 0 15px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin: 15px 0 10px; }
+        .section-title { font-size: 18px; font-weight: 800; color: var(--zeta); margin: 0; }
 
-        /* Recent Search Pills */
-        .search-pills { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-        .search-pills::-webkit-scrollbar { display: none; }
-        .pill { background: #e8f5e9; color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; text-decoration: none; }
+        /* Item Cards */
+        .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; position: relative; }
+        .card img { width: 100%; height: 120px; object-fit: cover; }
+        .card-info { padding: 10px; }
+        .card-price { color: var(--primary); font-weight: 800; font-size: 15px; }
+        .card-title { font-size: 13px; font-weight: 600; margin: 3px 0; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .card-loc { font-size: 11px; color: #888; }
+        
+        /* Pro Badge on Cards */
+        .pro-label { position: absolute; top: 8px; left: 8px; background: var(--gold); color: black; font-size: 9px; font-weight: 900; padding: 3px 7px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* Featured Card */
-        .card { background: white; border-radius: 18px; overflow: hidden; margin-top: 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); text-decoration: none; color: inherit; display: block; position: relative; }
-        .verified { position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; z-index: 10; }
-        .img { height: 180px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600') center/cover; }
-        .info { padding: 18px; }
-        .price { color: var(--primary); font-size: 20px; font-weight: 800; margin: 0; }
-
-        /* Navigation */
+        /* Bottom Nav */
         .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
         .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
         .f-link.active { color: var(--primary); }
@@ -47,48 +48,99 @@
 </head>
 <body>
 
-    <div class="top-section">
-        <div class="logo-text">TrustMart</div>
+    <div class="header">
+        <div class="logo-row">
+            <span style="font-weight:900; letter-spacing:1px; font-size:20px;">TRUSTMART</span>
+            <a href="notifications.html">
+                <i class="fas fa-bell"></i>
+                <div class="notif-dot"></div>
+            </a>
+        </div>
         <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search for cars, houses, or phones...">
+            <i class="fas fa-search" style="color:#888;"></i>
+            <input type="text" id="mainSearch" placeholder="Search cars, houses, phones..." onkeyup="filterItems()">
         </div>
     </div>
 
+    <div class="filters">
+        <a href="index.html" class="chip active">All Items</a>
+        <a href="category-vehicles.html" class="chip">Vehicles</a>
+        <a href="category-property.html" class="chip">Property</a>
+        <a href="category-electronics.html" class="chip">Electronics</a>
+    </div>
+
     <div class="container">
-        <div class="section-label">Popular Searches</div>
-        <div class="search-pills">
-            <a href="#" class="pill">Toyota Corolla</a>
-            <a href="#" class="pill">Lusaka Rentals</a>
-            <a href="#" class="pill">iPhone 14</a>
-            <a href="#" class="pill">Plots for sale</a>
+        <div class="section-header">
+            <h2 class="section-title">Latest in Zambia</h2>
+            <span style="font-size: 12px; color: var(--primary); font-weight: bold;">See All</span>
         </div>
 
-        <div class="section-label">Categories</div>
-        <div class="grid">
-            <a href="property.html" class="box"><i class="fas fa-home"></i><span>Property</span></a>
-            <a href="vehicles.html" class="box"><i class="fas fa-car"></i><span>Vehicles</span></a>
-            <a href="electronics.html" class="box"><i class="fas fa-mobile-alt"></i><span>Electronics</span></a>
-        </div>
+        <div class="items-grid" id="itemsGrid">
+            
+            <a href="category-vehicles.html" class="card" data-category="vehicles" data-name="toyota corolla">
+                <div class="pro-label"><i class="fas fa-crown"></i> PRO</div>
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400">
+                <div class="card-info">
+                    <div class="card-price">K 145,000</div>
+                    <span class="card-title">Toyota Corolla 2016</span>
+                    <span class="card-loc">Riverside, Kitwe</span>
+                </div>
+            </a>
 
-        <div class="section-label">Top Deal</div>
-        <a href="vehicles.html" class="card">
-            <div class="verified">VERIFIED</div>
-            <div class="img"></div>
-            <div class="info">
-                <p class="price">K 145,000</p>
-                <p style="margin:5px 0; font-weight: 700;">Toyota Corolla 2016</p>
-                <p style="color:#7f8c8d; font-size:12px;"><i class="fas fa-map-marker-alt"></i> Kitwe, Zambia</p>
-            </div>
-        </a>
+            <a href="#" class="card" data-category="electronics" data-name="iphone 14 pro">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400">
+                <div class="card-info">
+                    <div class="card-price">K 14,500</div>
+                    <span class="card-title">iPhone 14 Pro 256GB</span>
+                    <span class="card-loc">Cairo Road, Lusaka</span>
+                </div>
+            </a>
+
+            <a href="#" class="card" data-category="property" data-name="3 bedroom house">
+                <div class="pro-label"><i class="fas fa-crown"></i> PRO</div>
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400">
+                <div class="card-info">
+                    <div class="card-price">K 8,500/mo</div>
+                    <span class="card-title">3BR House Chilenje</span>
+                    <span class="card-loc">Chilenje, Lusaka</span>
+                </div>
+            </a>
+
+            <a href="#" class="card" data-category="electronics" data-name="hp elitebook">
+                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400">
+                <div class="card-info">
+                    <div class="card-price">K 6,500</div>
+                    <span class="card-title">HP Elitebook Laptop</span>
+                    <span class="card-loc">Kitwe Central</span>
+                </div>
+            </a>
+
+        </div>
     </div>
 
     <div class="footer">
         <a href="index.html" class="f-link active"><i class="fas fa-home"></i>Home</a>
-        <a href="sell.html" class="f-link"><i class="fas fa-plus-circle"></i>Sell</a>
+        <a href="notifications.html" class="f-link"><i class="fas fa-bell"></i>Alerts</a>
+        <a href="messages.html" class="f-link"><i class="fas fa-comment-dots"></i>Chats</a>
         <a href="profile.html" class="f-link"><i class="fas fa-user"></i>Profile</a>
-        <a href="help.html" class="f-link"><i class="fas fa-comment-dots"></i>Support</a>
     </div>
+
+    <script>
+        // Real-time Search Logic
+        function filterItems() {
+            const searchText = document.getElementById('mainSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name.includes(searchText)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
