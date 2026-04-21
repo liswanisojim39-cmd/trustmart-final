@@ -9,37 +9,36 @@
         :root { --primary: #27ae60; --zeta: #2c3e50; --light: #f4f7f6; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; color: #2c3e50; padding-bottom: 90px; }
         
-        /* Header */
-        .top-bar { background: var(--primary); color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 22px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        /* Header & Search Area */
+        .top-section { background: var(--primary); padding: 20px 15px 30px; border-radius: 0 0 25px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo-text { color: white; font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 15px; }
         
+        .search-box { background: white; display: flex; align-items: center; padding: 12px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .search-box i { color: #888; margin-right: 10px; }
+        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; }
+
         .container { padding: 15px; }
-        .section-label { font-size: 13px; font-weight: 800; color: #95a5a6; margin: 20px 0 10px 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-label { font-size: 12px; font-weight: 800; color: #95a5a6; margin: 20px 0 10px 5px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Town Scroller */
-        .town-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 5px; scrollbar-width: none; margin-bottom: 10px; }
-        .town-scroll::-webkit-scrollbar { display: none; }
-        .town-pill { background: white; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--primary); border: 1px solid var(--primary); white-space: nowrap; text-decoration: none; }
-
-        /* Category Grid */
+        /* Categories */
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .box { background: white; padding: 18px 5px; border-radius: 15px; text-align: center; text-decoration: none; color: #2c3e50; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border: 1px solid #eee; }
         .box i { color: var(--primary); font-size: 24px; display: block; margin-bottom: 8px; }
-        .box span { font-size: 12px; font-weight: 600; }
+        .box span { font-size: 11px; font-weight: 700; }
 
-        /* Safety Card */
-        .safety-card { background: #fff; border-radius: 15px; padding: 15px; border-left: 5px solid #f1c40f; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 20px; }
-        .safety-title { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #d35400; margin-bottom: 8px; font-size: 14px; }
-        .safety-list { margin: 0; padding: 0; list-style: none; font-size: 12px; color: #555; }
-        .safety-list li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        /* Recent Search Pills */
+        .search-pills { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+        .search-pills::-webkit-scrollbar { display: none; }
+        .pill { background: #e8f5e9; color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; text-decoration: none; }
 
         /* Featured Card */
         .card { background: white; border-radius: 18px; overflow: hidden; margin-top: 10px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); text-decoration: none; color: inherit; display: block; position: relative; }
-        .verified-badge { position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; display: flex; align-items: center; gap: 4px; z-index: 10; }
+        .verified { position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; z-index: 10; }
         .img { height: 180px; background: #ddd url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600') center/cover; }
         .info { padding: 18px; }
-        .price { color: var(--primary); font-size: 22px; font-weight: 800; margin: 0; }
+        .price { color: var(--primary); font-size: 20px; font-weight: 800; margin: 0; }
 
-        /* Bottom Navigation */
+        /* Navigation */
         .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; z-index: 1000; }
         .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
         .f-link.active { color: var(--primary); }
@@ -48,16 +47,21 @@
 </head>
 <body>
 
-    <div class="top-bar">TrustMart</div>
+    <div class="top-section">
+        <div class="logo-text">TrustMart</div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search for cars, houses, or phones...">
+        </div>
+    </div>
 
     <div class="container">
-        <div class="section-label">Browse Towns</div>
-        <div class="town-scroll">
-            <a href="#" class="town-pill">Lusaka</a>
-            <a href="#" class="town-pill">Kitwe</a>
-            <a href="#" class="town-pill">Ndola</a>
-            <a href="#" class="town-pill">Choma</a>
-            <a href="#" class="town-pill">Chipata</a>
+        <div class="section-label">Popular Searches</div>
+        <div class="search-pills">
+            <a href="#" class="pill">Toyota Corolla</a>
+            <a href="#" class="pill">Lusaka Rentals</a>
+            <a href="#" class="pill">iPhone 14</a>
+            <a href="#" class="pill">Plots for sale</a>
         </div>
 
         <div class="section-label">Categories</div>
@@ -67,23 +71,14 @@
             <a href="electronics.html" class="box"><i class="fas fa-mobile-alt"></i><span>Electronics</span></a>
         </div>
 
-        <div class="section-label">Safety First</div>
-        <div class="safety-card">
-            <div class="safety-title"><i class="fas fa-shield-alt"></i> Zeta Secure Trading</div>
-            <ul class="safety-list">
-                <li><i class="fas fa-check-circle" style="color:var(--primary)"></i> Meet in public places (e.g. Manda Hill)</li>
-                <li><i class="fas fa-check-circle" style="color:var(--primary)"></i> Inspect items before sending money</li>
-            </ul>
-        </div>
-
-        <div class="section-label">Featured Deal</div>
+        <div class="section-label">Top Deal</div>
         <a href="vehicles.html" class="card">
-            <div class="verified-badge"><i class="fas fa-check-circle"></i> VERIFIED</div>
+            <div class="verified">VERIFIED</div>
             <div class="img"></div>
             <div class="info">
                 <p class="price">K 145,000</p>
                 <p style="margin:5px 0; font-weight: 700;">Toyota Corolla 2016</p>
-                <p style="color:#7f8c8d; font-size:13px;"><i class="fas fa-map-marker-alt"></i> Kitwe, Zambia</p>
+                <p style="color:#7f8c8d; font-size:12px;"><i class="fas fa-map-marker-alt"></i> Kitwe, Zambia</p>
             </div>
         </a>
     </div>
