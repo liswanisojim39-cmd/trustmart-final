@@ -11,21 +11,17 @@
         :root { --primary: #27ae60; --zeta: #2c3e50; --fb-blue: #1877f2; --gold: #fbbf24; }
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 100px; }
         
-        .cover { width: 100%; height: 160px; background: #2c3e50; position: relative; }
+        .cover { width: 100%; height: 160px; background: var(--zeta); position: relative; }
         .profile-header { background: white; padding: 0 20px 20px; border-bottom: 1px solid #ddd; }
-        .avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; background: #999; margin-top: -50px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; background: #999; margin-top: -50px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
         
         .action-grid { display: flex; gap: 10px; margin: 20px 0; }
-        .btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; text-decoration: none; font-size: 13px; }
+        .btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; text-decoration: none; font-size: 13px; border: none; cursor: pointer; }
         .btn-blue { background: var(--fb-blue); color: white; }
-        .btn-auth { background: #fff; border: 1px solid #ddd; color: #555; cursor: pointer; }
+        .btn-auth { background: #fff; border: 1px solid #ddd; color: #555; }
 
-        .menu-list { background: white; margin-top: 15px; }
-        .menu-item { display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
-        .menu-item i { width: 30px; color: #65676b; }
-
-        /* ADMIN BUTTON - HIDDEN BY DEFAULT */
-        #adminSection { display: none; padding: 20px; background: #fff; margin-top: 15px; text-align: center; border: 2px dashed var(--fb-blue); }
+        /* ADMIN SECTION - LOCKED */
+        #adminSection { display: none; padding: 20px; background: #fff; margin: 15px; text-align: center; border: 2px solid var(--fb-blue); border-radius: 15px; box-shadow: 0 4px 15px rgba(24, 119, 242, 0.1); }
         
         .footer { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
         .f-link { text-decoration: none; color: #bdc3c7; font-size: 11px; text-align: center; }
@@ -38,7 +34,7 @@
     <div class="profile-header">
         <div class="avatar" id="userPhoto"><i class="fas fa-user"></i></div>
         <h2 id="userName" style="margin: 10px 0 5px;">Guest User</h2>
-        <p id="userEmail" style="color: #666; font-size: 13px; margin: 0;">Sign in to sync your data</p>
+        <p id="userEmail" style="color: #666; font-size: 13px; margin: 0;">Sign in to unlock admin features</p>
 
         <div class="action-grid">
             <button class="btn btn-auth" id="loginBtn" onclick="googleLogin()">
@@ -49,14 +45,9 @@
     </div>
 
     <div id="adminSection">
-        <b style="color: var(--fb-blue); display: block; margin-bottom: 10px;">Owner Detected</b>
-        <a href="admin.html" class="btn btn-blue" style="display: inline-block; width: 80%;">Open Admin Panel</a>
-    </div>
-
-    <div class="menu-list">
-        <a href="#" class="menu-item"><i class="fas fa-box"></i> My Listings</a>
-        <a href="#" class="menu-item"><i class="fas fa-heart"></i> Watchlist</a>
-        <a href="#" class="menu-item"><i class="fas fa-shield-alt"></i> Safety Center</a>
+        <i class="fas fa-user-shield" style="color: var(--fb-blue); font-size: 24px; margin-bottom: 10px;"></i>
+        <b style="display: block; margin-bottom: 10px; color: var(--zeta);">Owner Identity Verified</b>
+        <a href="admin.html" class="btn btn-blue" style="display: block;">Go to Control Panel</a>
     </div>
 
     <div class="footer">
@@ -66,7 +57,7 @@
     </div>
 
     <script>
-        // REPLACE THIS WITH YOUR FIREBASE CONFIG
+        // REPLACE THIS OBJECT WITH YOUR ACTUAL FIREBASE CONFIG FROM THE CONSOLE
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -80,21 +71,16 @@
         const auth = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
 
-        // CHANGE THIS TO YOUR ACTUAL GOOGLE EMAIL
-        const OWNER_EMAIL = "your-email@gmail.com";
+        const OWNER_EMAIL = "liswanisojim39@gmail.com";
 
         function googleLogin() {
             auth.signInWithPopup(provider).then((result) => {
                 updateUI(result.user);
-            }).catch((error) => {
-                console.error("Login Failed", error);
-            });
+            }).catch((err) => console.log(err));
         }
 
         function googleLogout() {
-            auth.signOut().then(() => {
-                location.reload();
-            });
+            auth.signOut().then(() => location.reload());
         }
 
         function updateUI(user) {
@@ -104,20 +90,17 @@
                 document.getElementById('loginBtn').style.display = 'none';
                 document.getElementById('logoutBtn').style.display = 'block';
                 
-                // Set Profile Photo
                 if(user.photoURL) {
-                    document.getElementById('userPhoto').innerHTML = `<img src="${user.photoURL}" style="width:100%; border-radius:50%">`;
+                    document.getElementById('userPhoto').innerHTML = `<img src="${user.photoURL}" style="width:100%">`;
                 }
 
-                // THE SECURITY CHECK
+                // CHECK IF YOU ARE THE OWNER
                 if (user.email === OWNER_EMAIL) {
                     document.getElementById('adminSection').style.display = 'block';
-                    localStorage.setItem('zeta_admin', 'true'); // Pass for admin.html
                 }
             }
         }
 
-        // Check if user is already logged in on page load
         auth.onAuthStateChanged(updateUI);
     </script>
 </body>
