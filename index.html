@@ -8,40 +8,62 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #27ae60; --dark: #0f172a; }
+        :root { --primary: #27ae60; }
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding-bottom: 80px; }
-        .header { background: var(--primary); padding: 20px; color: white; border-radius: 0 0 20px 20px; position: sticky; top:0; z-index:100; }
-        .search { background: white; border-radius: 10px; padding: 10px; margin-top: 15px; display: flex; align-items: center; }
-        .search input { border: none; outline: none; width: 100%; margin-left: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .header { background: var(--primary); padding: 20px; color: white; border-radius: 0 0 20px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .search-box { background: white; border-radius: 10px; padding: 10px; margin-top: 15px; display: flex; align-items: center; }
+        .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
         .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 130px; object-fit: cover; }
+        .card img { width: 100%; height: 130px; object-fit: cover; background: #eee; }
         .card-body { padding: 10px; }
         .price { color: var(--primary); font-weight: bold; font-size: 16px; }
-        .fab { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-decoration: none; }
+        .fab { position: fixed; bottom: 25px; right: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-decoration: none; z-index: 1000; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1 style="margin:0; font-size: 22px;">TRUST MART <small style="font-weight:300; font-size:12px;">by Zeta</small></h1>
-        <div class="search"><i class="fas fa-search" style="color:#888"></i><input type="text" placeholder="Search Zambia..." onkeyup="search(this.value)"></div>
+        <div class="search-box"><i class="fas fa-search" style="color:#888"></i><input type="text" placeholder="Search Zambia..." onkeyup="filter(this.value)"></div>
     </div>
+
     <div class="grid" id="feed"></div>
     <a href="post-ad.html" class="fab"><i class="fas fa-plus"></i></a>
+
     <script>
-        const firebaseConfig = { apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA", authDomain: "trust-mart-73f8a.firebaseapp.com", projectId: "trust-mart-73f8a", storageBucket: "trust-mart-73f8a.firebasestorage.app", messagingSenderId: "715567477271", appId: "1:715567477271:web:0550e70b07f7db8e80a252" };
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1GK3idp1dzm9ErX0k50dfFnCLjPVapLA",
+            authDomain: "trust-mart-73f8a.firebaseapp.com",
+            projectId: "trust-mart-73f8a",
+            storageBucket: "trust-mart-73f8a.firebasestorage.app",
+            messagingSenderId: "715567477271",
+            appId: "1:715567477271:web:0550e70b07f7db8e80a252"
+        };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+
         db.collection("ads").where("status", "==", "approved").orderBy("createdAt", "desc").onSnapshot(snap => {
             const feed = document.getElementById('feed');
             feed.innerHTML = "";
             snap.forEach(doc => {
                 const ad = doc.data();
-                feed.innerHTML += `<div class="card"><img src="${ad.imageUrl}"><div class="card-body"><div class="price">K ${ad.price}</div><div style="font-weight:bold;font-size:14px;">${ad.title}</div><div style="font-size:11px;color:#666">${ad.location}</div></div></div>`;
+                feed.innerHTML += `
+                    <div class="card">
+                        <img src="${ad.imageUrl}">
+                        <div class="card-body">
+                            <div class="price">K ${Number(ad.price).toLocaleString()}</div>
+                            <div style="font-weight:bold; font-size:14px;">${ad.title}</div>
+                            <div style="font-size:11px; color:#666;"><i class="fas fa-map-marker-alt"></i> ${ad.location}</div>
+                        </div>
+                    </div>`;
             });
         });
-        function search(v) {
-            document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(v.toLowerCase()) ? "block" : "none");
+
+        function filter(v) {
+            let val = v.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = c.innerText.toLowerCase().includes(val) ? "block" : "none";
+            });
         }
     </script>
 </body>
