@@ -6,109 +6,79 @@
     <title>TrustMart - Vehicles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #27ae60;
-            --dark: #2c3e50;
-            --light: #f4f7f6;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding-bottom: 20px; }
+        
+        .header { background: #27ae60; color: white; padding: 20px; display: flex; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
+        .back-btn { color: white; text-decoration: none; font-size: 20px; }
+        
+        /* Filter Bar */
+        .filter-bar { background: white; padding: 10px 15px; display: flex; gap: 10px; overflow-x: auto; border-bottom: 1px solid #eee; scrollbar-width: none; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .filter-item { background: #f0f2f0; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; border: none; }
+        .filter-item.active { background: #27ae60; color: white; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            padding: 20px;
-        }
-
-        .nav-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .back-btn {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 20px;
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .listing-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-
-        .listing-image {
-            width: 100%;
-            height: 200px;
-            background: #eee url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600') center/cover;
-        }
-
-        .listing-details {
-            padding: 20px;
-        }
-
-        .listing-price {
-            color: var(--primary);
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .listing-title {
-            font-size: 18px;
-            color: var(--dark);
-            margin: 8px 0;
-            font-weight: 600;
-        }
-
-        .listing-loc {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .wa-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #25d366;
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 16px;
-        }
+        .container { padding: 15px; }
+        
+        /* Vehicle Card */
+        .v-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; display: block; }
+        .v-img { height: 180px; background-size: cover; background-position: center; position: relative; }
+        .v-price { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        .v-info { padding: 15px; }
+        .v-title { font-size: 16px; font-weight: bold; margin: 0; color: #2c3e50; }
+        .v-tags { display: flex; gap: 10px; margin-top: 8px; font-size: 12px; color: #888; }
+        .v-tags span { background: #f8f9fa; padding: 3px 8px; border-radius: 4px; }
+        
+        .wa-btn { background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <div class="nav-header">
+    <div class="header">
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-        <h2 style="margin:0; color: var(--dark);">Vehicles</h2>
+        <h1 style="margin:0; font-size: 20px;">Vehicles</h1>
     </div>
 
-    <div class="listing-card">
-        <div class="listing-image"></div>
-        <div class="listing-details">
-            <p class="listing-price">K 145,000</p>
-            <p class="listing-title">Toyota Corolla - Pristine Condition</p>
-            <p class="listing-loc"><i class="fas fa-map-marker-alt"></i> Kitwe, Copperbelt</p>
-            <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20Toyota%20Corolla" class="wa-button">
-                <i class="fab fa-whatsapp"></i> Chat with Seller
-            </a>
+    <div class="filter-bar">
+        <button class="filter-item active">All Cars</button>
+        <button class="filter-item">Toyota</button>
+        <button class="filter-item">SUV</button>
+        <button class="filter-item">Under K100k</button>
+        <button class="filter-item">Lusaka</button>
+    </div>
+
+    <div class="container">
+        <div class="v-card">
+            <div class="v-img" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600');">
+                <div class="v-price">K 145,000</div>
+            </div>
+            <div class="v-info">
+                <p class="v-title">Toyota Corolla 2016</p>
+                <div class="v-tags">
+                    <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                    <span><i class="fas fa-cog"></i> Automatic</span>
+                </div>
+                <p style="font-size: 12px; color: #888; margin: 10px 0;"><i class="fas fa-map-marker-alt"></i> Kitwe, Copperbelt</p>
+                <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20Toyota%20Corolla" class="wa-btn">
+                    <i class="fab fa-whatsapp"></i> Chat with Seller
+                </a>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-img" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600');">
+                <div class="v-price">K 210,000</div>
+            </div>
+            <div class="v-info">
+                <p class="v-title">Nissan X-Trail 2015</p>
+                <div class="v-tags">
+                    <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                    <span><i class="fas fa-cog"></i> 4WD</span>
+                </div>
+                <p style="font-size: 12px; color: #888; margin: 10px 0;"><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</p>
+                <a href="https://wa.me/260979710270?text=I%20am%20interested%20in%20the%20Nissan%20Xtrail" class="wa-btn">
+                    <i class="fab fa-whatsapp"></i> Chat with Seller
+                </a>
+            </div>
         </div>
     </div>
 
