@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Identity - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; }
+        .header { background: white; padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; }
+        .container { padding: 30px 20px; text-align: center; }
+        
+        .shield-icon { font-size: 60px; color: var(--primary); margin-bottom: 20px; }
+        .step-card { background: white; padding: 20px; border-radius: 20px; text-align: left; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .step-num { width: 25px; height: 25px; background: var(--zeta); color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-right: 10px; }
+        
+        .upload-area { border: 2px dashed #ccc; padding: 30px; border-radius: 15px; margin: 20px 0; background: #fafafa; }
+        .btn { background: var(--primary); color: white; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; border: none; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="profile.html" style="color:var(--zeta); text-decoration:none;"><i class="fas fa-arrow-left"></i></a>
+        <h2 style="margin:0; font-size: 18px;">Identity Verification</h2>
+    </div>
+
+    <div class="container">
+        <div class="shield-icon"><i class="fas fa-user-shield"></i></div>
+        <h2 style="color: var(--zeta);">Get Verified</h2>
+        <p style="color: #666; font-size: 14px;">Increase your sales by 80% by proving you are a legitimate Zambian trader.</p>
+
+        <div class="step-card">
+            <p><b><span class="step-num">1</span> Take a Photo of NRC</b></p>
+            <div class="upload-area"><i class="fas fa-id-card"></i><br>Upload Front</div>
+        </div>
+
+        <div class="step-card">
+            <p><b><span class="step-num">2</span> Take a Selfie</b></p>
+            <div class="upload-area"><i class="fas fa-camera-retro"></i><br>Take Selfie</div>
+        </div>
+
+        <button class="btn" onclick="location.href='success.html'">Submit for Review</button>
+    </div>
+
+</body>
+</html>
