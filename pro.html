@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeta Pro - TrustMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #27ae60; --zeta: #2c3e50; --gold: #f1c40f; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--zeta); margin: 0; color: white; padding-bottom: 40px; }
+        
+        .header { padding: 40px 20px; text-align: center; background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); position: relative; overflow: hidden; }
+        .back-btn { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 20px; }
+        .pro-badge { background: var(--gold); color: black; padding: 5px 15px; border-radius: 20px; font-weight: 900; font-size: 12px; letter-spacing: 2px; }
+        
+        .container { padding: 20px; }
+        
+        .pricing-card { background: rgba(255,255,255,0.1); border: 2px solid var(--gold); padding: 30px 20px; border-radius: 25px; text-align: center; margin-bottom: 30px; backdrop-filter: blur(10px); }
+        .price { font-size: 40px; font-weight: 900; margin: 15px 0; }
+        .price span { font-size: 16px; opacity: 0.7; }
+
+        .features-list { text-align: left; margin: 25px 0; }
+        .f-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 14px; }
+        .f-item i { color: var(--gold); }
+
+        .pay-btn { background: var(--gold); color: black; width: 100%; padding: 18px; border-radius: 15px; font-weight: 800; text-decoration: none; display: block; font-size: 16px; border: none; cursor: pointer; }
+        
+        .mobile-money { margin-top: 25px; display: flex; justify-content: center; gap: 20px; opacity: 0.6; }
+        .mobile-money img { height: 30px; filter: grayscale(100%); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="profile.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <div style="margin-bottom: 15px;"><span class="pro-badge">ZETA PRO</span></div>
+        <h1 style="margin:0;">Sell Faster.</h1>
+        <p style="opacity: 0.8;">Boost your visibility across Zambia.</p>
+    </div>
+
+    <div class="container">
+        <div class="pricing-card">
+            <p style="color: var(--gold); font-weight: bold; margin: 0;">AD BOOST PACK</p>
+            <div class="price">K 50 <span>/ month</span></div>
+            
+            <div class="features-list">
+                <div class="f-item"><i class="fas fa-check-circle"></i> Top-of-page placement</div>
+                <div class="f-item"><i class="fas fa-check-circle"></i> "Verified Pro" Badge</div>
+                <div class="f-item"><i class="fas fa-check-circle"></i> Unlimited Monthly Listings</div>
+                <div class="f-item"><i class="fas fa-check-circle"></i> Advanced Seller Analytics</div>
+            </div>
+
+            <button class="pay-btn" onclick="location.href='success.html'">Activate Pro Now</button>
+        </div>
+
+        <p style="text-align: center; font-size: 12px; opacity: 0.5;">Secure Payment via Mobile Money</p>
+        <div class="mobile-money">
+            <i class="fas fa-mobile-alt"></i> Airtel Money | MTN Money
+        </div>
+    </div>
+
+</body>
+</html>
