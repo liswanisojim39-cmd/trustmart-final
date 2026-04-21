@@ -3,104 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustMart Zambia</title>
+    <title>Sell on TrustMart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #27ae60; --dark: #2c3e50; --light: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding-bottom: 100px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light); margin: 0; padding: 20px; }
         
-        .header { background: var(--primary); color: white; padding: 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 24px; }
-
-        .search-area { padding: 15px; }
-        .search-box { background: white; display: flex; align-items: center; padding: 12px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-size: 16px; }
-
-        .section-header { padding: 15px 20px 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .section-header h2 { font-size: 16px; margin: 0; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Just In Horizontal Scroll */
-        .just-in-scroll { display: flex; gap: 15px; padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
-        .just-in-scroll::-webkit-scrollbar { display: none; }
-        .just-in-card { min-width: 140px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .just-in-img { height: 100px; background-size: cover; background-position: center; }
-        .just-in-info { padding: 10px; }
-        .just-in-price { color: var(--primary); font-weight: bold; font-size: 14px; margin: 0; }
-        .just-in-title { font-size: 11px; color: var(--dark); margin: 3px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
-        .cat-item { background: white; padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--dark); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .cat-item i { font-size: 20px; color: var(--primary); margin-bottom: 8px; display: block; }
-        .cat-item span { font-size: 11px; font-weight: 600; }
-
-        .request-box { background: var(--dark); color: white; margin: 20px 15px; padding: 20px; border-radius: 15px; text-align: center; }
-        .request-btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 10px; }
-
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-link { text-decoration: none; color: #888; font-size: 11px; text-align: center; }
-        .nav-link.active { color: var(--primary); }
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .back-btn { text-decoration: none; color: var(--dark); font-size: 20px; }
+        
+        .form-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; color: var(--dark); font-size: 20px; }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 14px; font-weight: 600; color: #666; margin-bottom: 5px; }
+        .input-group input, .input-group select, .input-group textarea { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px;
+        }
+        
+        .submit-btn { 
+            background: var(--primary); color: white; border: none; width: 100%; padding: 15px; 
+            border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px;
+        }
+        .note { font-size: 12px; color: #888; text-align: center; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Trust<b>Mart</b></h1>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <h1 style="margin:0; font-size: 22px;">Submit Listing</h1>
     </div>
 
-    <div class="search-area">
-        <div class="search-box">
-            <i class="fas fa-search" style="color: #999;"></i>
-            <input type="text" placeholder="Search TrustMart...">
+    <div class="form-card">
+        <h2>Item Details</h2>
+        <div class="input-group">
+            <label>Category</label>
+            <select id="category">
+                <option>Vehicles</option>
+                <option>Property</option>
+                <option>Electronics</option>
+                <option>Other</option>
+            </select>
         </div>
-    </div>
 
-    <div class="section-header">
-        <h2>Just In</h2>
-    </div>
-    <div class="just-in-scroll">
-        <div class="just-in-card">
-            <div class="just-in-img" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300');"></div>
-            <div class="just-in-info">
-                <p class="just-in-price">K 8,500</p>
-                <p class="just-in-title">iPhone 12</p>
-            </div>
+        <div class="input-group">
+            <label>Item Name</label>
+            <input type="text" id="itemName" placeholder="e.g. Toyota Corolla 2014">
         </div>
-        <div class="just-in-card">
-            <div class="just-in-img" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300');"></div>
-            <div class="just-in-info">
-                <p class="just-in-price">K 1,200</p>
-                <p class="just-in-title">Smart Watch</p>
-            </div>
+
+        <div class="input-group">
+            <label>Price (ZMW)</label>
+            <input type="number" id="price" placeholder="e.g. 85000">
         </div>
-        <div class="just-in-card">
-            <div class="just-in-img" style="background-image: url('https://images.unsplash.com/photo-1484704849700-f032a568e944?w=300');"></div>
-            <div class="just-in-info">
-                <p class="just-in-price">K 2,500</p>
-                <p class="just-in-title">Headphones</p>
-            </div>
+
+        <div class="input-group">
+            <label>Location</label>
+            <input type="text" id="location" placeholder="e.g. Lusaka, Central">
         </div>
+
+        <div class="input-group">
+            <label>Description</label>
+            <textarea id="description" rows="3" placeholder="Condition, specs, etc."></textarea>
+        </div>
+
+        <button class="submit-btn" onclick="sendToWhatsApp()">
+            Submit via WhatsApp <i class="fab fa-whatsapp"></i>
+        </button>
+        
+        <p class="note">Your listing will be reviewed and posted within 24 hours.</p>
     </div>
 
-    <div class="section-header" style="margin-top: 20px;">
-        <h2>Categories</h2>
-    </div>
-    <div class="cat-grid">
-        <a href="property.html" class="cat-item"><i class="fas fa-home"></i><span>Property</span></a>
-        <a href="vehicles.html" class="cat-item"><i class="fas fa-car"></i><span>Vehicles</span></a>
-        <a href="electronics.html" class="cat-item"><i class="fas fa-mobile-alt"></i><span>Electronics</span></a>
-    </div>
+    <script>
+        function sendToWhatsApp() {
+            const category = document.getElementById('category').value;
+            const item = document.getElementById('itemName').value;
+            const price = document.getElementById('price').value;
+            const loc = document.getElementById('location').value;
+            const desc = document.getElementById('description').value;
 
-    <div class="request-box">
-        <h3 style="margin:0;">Can't find it?</h3>
-        <p style="font-size: 12px; opacity: 0.8;">We can source any item for you.</p>
-        <a href="https://wa.me/260979710270?text=Request%3A" class="request-btn">Request an Item</a>
-    </div>
+            const message = `Hello TrustMart! I want to sell something:%0A%0A` +
+                            `*Category:* ${category}%0A` +
+                            `*Item:* ${item}%0A` +
+                            `*Price:* K${price}%0A` +
+                            `*Location:* ${loc}%0A` +
+                            `*Description:* ${desc}`;
 
-    <div class="bottom-nav">
-        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i><br>Home</a>
-        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-plus-circle"></i><br>Sell</a>
-        <a href="https://wa.me/260979710270" class="nav-link"><i class="fas fa-headset"></i><br>Help</a>
-    </div>
+            // Replace with your actual WhatsApp number
+            window.location.href = `https://wa.me/260979710270?text=${message}`;
+        }
+    </script>
 
 </body>
 </html>
